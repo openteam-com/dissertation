@@ -1,0 +1,3 @@
+development:
+  adapter: adapter
+  database: db_name
