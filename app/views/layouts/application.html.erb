@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Dissertation</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title>Dissertation</title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="container">
+          <div class="navbar-right">
+            <% if user_signed_in? %>
+              <p class="navbar-text">Здравствуйте <%= current_user.email %></p>
+              <%= link_to "Выйти", destroy_user_session_path, :class =>"btn btn-primary navbar-btn", :method => :delete %>
+            <% else %>
+              <%= link_to "Зарегистрироваться", new_user_registration_path, :class =>"btn btn-default navbar-btn" %>
+              <%= link_to "Войти", new_user_session_path, :class =>"btn btn-success navbar-btn" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <% if notice %>
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= notice %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
 </html>

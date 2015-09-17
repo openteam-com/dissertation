@@ -1,0 +1,18 @@
+ru:
+  simple_form:
+    required:
+      text: 'Обязательное для заполенения поле'
+      mark: '*'
+    labels:
+      user:
+        email: 'E-mail'
+        password: 'Пароль'
+        password_confirmation: 'Подтвеждение пароля'
+    hints:
+      user:
+        password_confirmation: 'минимум 8 символов'
+    placeholders:
+      user:
+        email: 'Введите e-mail'
+        password: 'Введите пароль'
+        password_confirmation: 'Введите подтверждение пароля'
