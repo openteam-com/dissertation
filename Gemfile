@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 group :default do
   gem 'bootstrap-sass'
+  gem 'breadcrumbs_on_rails'
   gem 'coffee-rails', '~> 4.1.0'
   gem 'configliere'
   gem 'devise'
@@ -9,6 +10,7 @@ group :default do
   gem 'jbuilder', '~> 2.0'
   gem 'jquery-rails'
   gem 'jquery-ui-rails'
+  gem 'nested_form'
   gem 'pg'
   gem 'rails', '4.2.4'
   gem 'responders'

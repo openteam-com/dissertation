@@ -1,0 +1,6 @@
+<%= render :partial => 'commons/breadcrumbs' %>
+<%= simple_form_for @software_product, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+  <%= f.input :title %>
+  <%= f.input :user_id, :as => :hidden, :input_html => {:value => current_user.id} %>
+  <%= f.button :submit, :class => "pull-right btn-success" %>
+<% end %>

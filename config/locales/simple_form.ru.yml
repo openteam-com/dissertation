@@ -8,6 +8,16 @@ ru:
         email: 'E-mail'
         password: 'Пароль'
         password_confirmation: 'Подтвеждение пароля'
+      software_product:
+        title: 'Название программного продукта'
+      replication_model:
+        title: 'Название модели'
+        fixed_costs: 'Постоянные затраты'
+        variable_costs: 'Переменные затраты'
+      workforces:
+        specialists: 'Группа специалистов'
+        fixed_resources: 'Постоянные ресурсы'
+        variable_resources: 'Переменные ресурсы'
     hints:
       user:
         password_confirmation: 'минимум 8 символов'
@@ -16,3 +26,12 @@ ru:
         email: 'Введите e-mail'
         password: 'Введите пароль'
         password_confirmation: 'Введите подтверждение пароля'
+      software_product:
+        title: 'Название программного продукта'
+      replication_model:
+        fixed_costs: 'Постоянные затраты'
+        variable_costs: 'Переменные затраты'
+      workforces:
+        specialists: 'Трудовые ресурсы узкопрофильных специалистов'
+        fixed_resources: 'Требуемые постоянные ресурсы'
+        variable_resources: 'Требуемые переменные ресурсы'

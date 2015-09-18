@@ -1,0 +1,24 @@
+<%= link_to new_software_product_path, :class => "btn btn-success pull-right new-software-product-button" do %>
+  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  Новый программный продукт
+<% end %>
+<div class="software-products">
+  <% if @software_products.present? %>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <th>Название программного продукта</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @software_products.each do |product| %>
+          <tr>
+            <td><%= link_to product.title, software_product_path(product) %></td>
+            <td> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h1>Нет программных продуктов</h1>
+  <% end %>
+</div>

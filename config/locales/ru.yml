@@ -1,2 +1,12 @@
-en:
-  hello: "Hello world"
+ru:
+  activerecord:
+    models:
+      software_product: "программный продукт"
+      replication_model: "модель тиражирования"
+  enumerize:
+    title:
+      saas: "SAAS"
+      esp: "ESP"
+      spo: "SPO"
+      license: "Лицензия"
+

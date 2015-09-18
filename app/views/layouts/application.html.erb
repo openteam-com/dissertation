@@ -29,7 +29,19 @@
           <%= notice %>
         </div>
       <% end %>
-      <%= yield %>
+
+      <% if user_signed_in? %>
+        <ul class="nav nav-tabs">
+          <%= content_tag :li, :class => request.path.match(/software_products/)? 'active' : nil do %>
+            <%= link_to "Програмные продукты", software_products_path %>
+          <% end %>
+        </ul>
+      <% end %>
+      <div class="col-xs-12">
+        <div class="content-wrapper">
+          <%= yield %>
+        </div>
+      </div>
     </div>
   </body>
 </html>
