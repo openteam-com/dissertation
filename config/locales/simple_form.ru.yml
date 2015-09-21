@@ -10,6 +10,7 @@ ru:
         password_confirmation: 'Подтвеждение пароля'
       software_product:
         title: 'Название программного продукта'
+        research_items_csv: 'CSV файл для импорта объектов для исследования'
       replication_model:
         title: 'Название модели'
         fixed_costs: 'Постоянные затраты'

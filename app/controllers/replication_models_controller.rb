@@ -24,7 +24,7 @@ class ReplicationModelsController < ApplicationController
 
   def destroy
     ReplicationModel.find(params[:id]).destroy
-    redirect_to software_products_path
+    redirect_to software_product_path(@software_product)
   end
 
   private

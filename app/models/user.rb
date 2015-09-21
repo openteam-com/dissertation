@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :trackable, :validatable
 
-  has_many :software_products
+  has_many :software_products, :dependent => :destroy
 end
 
 # == Schema Information

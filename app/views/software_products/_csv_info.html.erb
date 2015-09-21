@@ -1,0 +1,14 @@
+<div class="csv-wrapper js-csv-wrapper">
+  <% if @software_product.research_items.present? %>
+    <%= render :partial => 'commons/research_items_table', :locals => { :collection => @software_product.limited_research_items } %>
+    <div class="btn-group pull-right" role="group">
+      <%= link_to "Посмотреть все значения", software_product_research_items_path(@software_product), :class => "btn btn-default" %>
+      <%= link_to "Удалить все значения", software_product_destroy_research_items_path(@software_product), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Вы уверены?"} %>
+    </div>
+  <% else %>
+    <%= simple_form_for @software_product, :url => software_product_upload_csv_path(@software_product) do |f| %>
+      <%= f.input :research_items_csv %>
+      <%= f.button :submit, "Загрузить CSV" %>
+    <% end %>
+  <% end %>
+</div>

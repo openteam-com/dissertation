@@ -13,3 +13,4 @@
 #Ignore assets and sitemap
 /public/assets
 /public/sitemap*
+/public/system

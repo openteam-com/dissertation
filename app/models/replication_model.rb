@@ -1,6 +1,6 @@
 class ReplicationModel < ActiveRecord::Base
   belongs_to :software_product
-  has_many :workforces
+  has_many :workforces, :dependent => :destroy
 
   validates_presence_of :title, :fixed_costs, :variable_costs
 

@@ -1,0 +1,5 @@
+<%= render :partial => 'commons/breadcrumbs' %>
+<%= render :partial => 'commons/research_items_table', :locals => { :collection => @research_items } %>
+<div class="pagination-wrapper">
+  <%= paginate @research_items, :theme => 'twitter-bootstrap-3' %>
+</div>

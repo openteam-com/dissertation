@@ -2,7 +2,7 @@
 <div class="software-product-attribute">
   <p class="pull-left">Название программного продукта:</p>
   <p class="pull-left"><%= @software_product.title %></p>
-  <div class="btn-toolbar pull-right" role="toolbar">
+  <div class="btn-group pull-right" role="group">
     <%= link_to edit_software_product_path(@software_product), :class =>"btn btn-warning", :title => "Редактировать" do %>
       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
     <% end %>
@@ -11,6 +11,24 @@
     <% end %>
   </div>
 </div>
+
+<div class="software-product-attribute">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Объекты исследования:</div>
+    <div class="panel-body js-panel-body">
+      <% if params[:job_id].present? %>
+        <div class="js-progress">
+          <p><%= I18n.t("progressbar.title.#{params[:pb_kind]}") %></p>
+          <div class="progress">
+            <div class="js-progressbar progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" data-jobid=<%= params[:job_id] %>></div>
+          </div>
+        </div>
+      <% end %>
+      <%= render :partial => 'csv_info' %>
+    </div>
+  </div>
+</div>
+
 <div class="software-product-attribute">
   <p class="pull-left">
     Модели:
@@ -19,24 +37,28 @@
     <% end %>
   </p>
   <div class="models">
-    <% @software_product.replication_models.each do |product| %>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <%= product.title %>
-          <%= link_to edit_software_product_replication_model_path(@software_product, product), :title => "Редактировать модель" do %>
-            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-          <% end %>
-          <%= link_to software_product_replication_model_path(@software_product, product), :title => "Удалить модель", :method => :delete, :date => {:confirm => "Вы уверены?"} do %>
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          <% end %>
-          <p>Трудовые ресурсы:</p>
-          <ul>
-            <% product.workforces.each do |workforce| %>
-              <li><%= workforce.specialists %></li>
+    <% if @software_product.replication_models.present? %>
+      <% @software_product.replication_models.each do |product| %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <%= product.title %>
+            <%= link_to edit_software_product_replication_model_path(@software_product, product), :title => "Редактировать модель" do %>
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
             <% end %>
-          </ul>
+            <%= link_to software_product_replication_model_path(@software_product, product), :title => "Удалить модель", :method => :delete, :date => {:confirm => "Вы уверены?"} do %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+            <p>Трудовые ресурсы:</p>
+            <ul>
+              <% product.workforces.each do |workforce| %>
+                <li><%= workforce.specialists %></li>
+              <% end %>
+            </ul>
+          </div>
         </div>
-      </div>
+      <% end %>
+    <% else %>
+      <h4>Не добавлено ни одной модели</h4>
     <% end %>
   </div>
 </div>
