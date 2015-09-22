@@ -1,0 +1,15 @@
+<%= render :partial => 'commons/breadcrumbs' %>
+<%= simple_nested_form_for [@software_product, @grouping], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+  <%= f.input :title %>
+  <%= f.simple_fields_for :grouping_parameters, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |gpf| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= gpf.input :grouping_field, :as => :select, :collection => @software_product.research_items_headers, :selected => gpf.object.grouping_field  %>
+        <%= gpf.input :kind %>
+        <%= gpf.link_to_remove "Удалить параметры группировки", :class => "pull-right" %>
+      </div>
+    </div>
+  <% end %>
+  <%= f.link_to_add "Добавить параметры группировки", :grouping_parameters, :class => "btn btn-primary" %>
+  <%= f.button :submit, :class => "btn btn-success pull-right" %>
+<% end %>

@@ -19,6 +19,11 @@ ru:
         specialists: 'Группа специалистов'
         fixed_resources: 'Постоянные ресурсы'
         variable_resources: 'Переменные ресурсы'
+      grouping:
+        title: 'Название группировки'
+      grouping_parameters:
+        grouping_field: 'Поле для группировки'
+        kind: 'Тип параметра групировки'
     hints:
       user:
         password_confirmation: 'минимум 8 символов'
@@ -28,11 +33,15 @@ ru:
         password: 'Введите пароль'
         password_confirmation: 'Введите подтверждение пароля'
       software_product:
-        title: 'Название программного продукта'
+        title: 'Введите название программного продукта'
       replication_model:
-        fixed_costs: 'Постоянные затраты'
-        variable_costs: 'Переменные затраты'
+        fixed_costs: 'Введите постоянные затраты'
+        variable_costs: 'Введите переменные затраты'
       workforces:
         specialists: 'Трудовые ресурсы узкопрофильных специалистов'
         fixed_resources: 'Требуемые постоянные ресурсы'
         variable_resources: 'Требуемые переменные ресурсы'
+      grouping:
+        title: 'Введите название группировки'
+      grouping_parameters:
+        grouping_field: 'Поле для группировки'

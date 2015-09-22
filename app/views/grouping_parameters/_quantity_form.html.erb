@@ -1,0 +1,12 @@
+<%= f.simple_fields_for :quantity_grouping_values do |vf| %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= vf.input :title %>
+      <%= vf.input :min_count %>
+      <%= vf.input :max_count %>
+      <%= vf.link_to_remove "Удалить", :class => "pull-right" %>
+    </div>
+  </div>
+<% end %>
+<%= f.link_to_add "Добавить значения", :quantity_grouping_values, :class => "btn btn-primary" %>
+

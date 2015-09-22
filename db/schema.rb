@@ -11,10 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918104854) do
+ActiveRecord::Schema.define(version: 20150922063545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "grouping_parameters", force: :cascade do |t|
+    t.string   "grouping_field"
+    t.string   "kind"
+    t.integer  "grouping_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "groupings", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "software_product_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  create_table "quality_grouping_values", force: :cascade do |t|
+    t.string   "title"
+    t.text     "values"
+    t.integer  "grouping_parameter_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "quantity_grouping_values", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "max_count"
+    t.integer  "min_count"
+    t.integer  "grouping_parameter_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "replication_models", force: :cascade do |t|
     t.string   "title"

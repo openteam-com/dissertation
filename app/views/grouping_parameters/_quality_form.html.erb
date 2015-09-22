@@ -1,0 +1,11 @@
+<%= f.simple_fields_for :quality_grouping_values do |vf| %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= vf.input :title %>
+      <%= vf.input :values, :as => :check_boxes, :collection => @software_product.uniq_values_for_quality_values(@grouping_parameter.grouping_field) %>
+      <%= vf.link_to_remove "Удалить", :class => "pull-right" %>
+    </div>
+  </div>
+<% end %>
+<%= f.link_to_add "Добавить значения", :quality_grouping_values, :class => "btn btn-primary" %>
+

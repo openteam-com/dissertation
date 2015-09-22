@@ -13,7 +13,7 @@ class ReplicationModelsController < ApplicationController
 
   def edit
     @replication_model = ReplicationModel.find(params[:id])
-    add_breadcrumb "Новая модель тиражирования", edit_software_product_replication_model_path(@software_product, @replication_model)
+    add_breadcrumb "Редактировать модель тиражирования", edit_software_product_replication_model_path(@software_product, @replication_model)
   end
 
   def update
@@ -33,8 +33,7 @@ class ReplicationModelsController < ApplicationController
     end
 
     def replication_model_params
-      params.require(:replication_model).permit(:title, :fixed_costs, :variable_costs,
-                                                :workforces_attributes => [:id, :specialists, :fixed_resources, :variable_resources, :_destroy])
+      params.require(:replication_model).permit(:title, :fixed_costs, :variable_costs, :workforces_attributes => [:id, :specialists, :fixed_resources, :variable_resources, :_destroy])
     end
 
     def add_breadcrumbs

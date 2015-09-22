@@ -3,12 +3,17 @@ ru:
     models:
       software_product: "программный продукт"
       replication_model: "модель тиражирования"
+      grouping: "группировку"
+      grouping_parameter: "параметр группировки"
   enumerize:
     title:
       saas: "SAAS"
       esp: "ESP"
       spo: "SPO"
       license: "Лицензия"
+    kind:
+      quantity: "Количественная"
+      quality: "Качественная"
   views:
     pagination:
       first: "&laquo; Первая"

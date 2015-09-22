@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     delete 'destroy_research_items'
     resources :replication_models, :except => [:index, :show]
     resources :research_items, :only => :index
+    resources :groupings, :except => [:index, :show] do
+      resources :grouping_parameters, :only => [:edit, :update, :destroy]
+    end
   end
 
   root :to => "welcome#index"

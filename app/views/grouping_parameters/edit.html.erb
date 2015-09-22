@@ -1,0 +1,8 @@
+<%= render :partial => 'commons/breadcrumbs' %>
+<%= simple_nested_form_for [@software_product, @grouping, @grouping_parameter], html: { class: 'form-horizontal' }, wrapper: :horizontal_form,
+  wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+} do |f| %>
+  <%= render :partial => "#{@grouping_parameter.kind}_form", :locals => { :f => f } %>
+  <%= f.button :submit, :class => "pull-right btn-success" %>
+<% end %>
