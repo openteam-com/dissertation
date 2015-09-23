@@ -1,7 +1,12 @@
 class QuantityGroupingValue < ActiveRecord::Base
+  has_many :segments, :as => :grouping_value, :dependent => :destroy
   belongs_to :grouping_parameter
 
   validates_presence_of :title, :max_count, :min_count
+
+  def prefix
+    "quantity"
+  end
 end
 
 # == Schema Information

@@ -1,0 +1,7 @@
+<% segment.children.order(:title).each do |child| %>
+  <tr>
+    <td><%= child.title %></td>
+    <td><%= link_to child.research_items.count, software_product_research_items_path(@software_product, :segment_id => child.id) %></td>
+  </tr>
+  <%= render :partial => 'segment_children', :locals => {segment: child} if child.has_children? %>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922063545) do
+ActiveRecord::Schema.define(version: 20150923040546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 20150922063545) do
     t.integer  "software_product_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  create_table "item_segments", force: :cascade do |t|
+    t.integer  "research_item_id"
+    t.integer  "segment_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "quality_grouping_values", force: :cascade do |t|
@@ -60,6 +67,16 @@ ActiveRecord::Schema.define(version: 20150922063545) do
   create_table "research_items", force: :cascade do |t|
     t.text     "data"
     t.integer  "software_product_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  create_table "segments", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "grouping_value_id"
+    t.string   "grouping_value_type"
+    t.integer  "grouping_id"
+    t.string   "ancestry"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end

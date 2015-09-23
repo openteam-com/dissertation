@@ -66,6 +66,7 @@
                 <% end %>
               </ul>
             <% end %>
+            <%= link_to "Сегменты", software_product_grouping_segments_path(@software_product, grouping), :class => "btn btn-default" %>
           <% end %>
         <% else %>
           <h4>Не добавлено ни одной группировки</h4>

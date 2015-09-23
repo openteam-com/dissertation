@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 group :default do
+  gem 'ancestry'
   gem 'bootstrap-sass'
   gem 'bootstrap-kaminari-views'
   gem 'breadcrumbs_on_rails'

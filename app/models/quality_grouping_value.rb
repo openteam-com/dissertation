@@ -1,4 +1,5 @@
 class QualityGroupingValue < ActiveRecord::Base
+  has_many :segments, :as => :grouping_value, :dependent => :destroy
   belongs_to :grouping_parameter
 
   validates_presence_of :title, :values
@@ -6,6 +7,10 @@ class QualityGroupingValue < ActiveRecord::Base
   serialize :values, Array
 
   before_save :compact_values
+
+  def prefix
+    "quality"
+  end
 
   private
 

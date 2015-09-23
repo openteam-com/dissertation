@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :research_items, :only => :index
     resources :groupings, :except => [:index, :show] do
       resources :grouping_parameters, :only => [:edit, :update, :destroy]
+      resources :segments, :only => [:index]
     end
   end
 

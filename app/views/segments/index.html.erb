@@ -1,0 +1,10 @@
+<table class="table table-bordered table-hover">
+  <% @segments.roots.each do |segment| %>
+    <tr class="info">
+      <td colspan=2>
+        <%= segment.title %>(<%= link_to segment.research_items.count, software_product_research_items_path(@software_product, :segment_id => segment.id) %>)
+      </td>
+    </tr>
+    <%= render :partial => 'segment_children', :locals => {segment: segment} if segment.has_children? %>
+  <% end %>
+</table>
