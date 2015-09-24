@@ -2,12 +2,22 @@ class SegmentsController < ApplicationController
   before_action :authenticate_user!, :software_product, :grouping, :add_breadcrumbs
 
   def index
-    if @grouping.segments.present?
+    add_breadcrumb "Сегменты", software_product_grouping_segments_path(@software_product, @grouping)
+
+    if @grouping.segments.present? && !params[:job_id]
       @segments = @grouping.segments
+    elsif params[:job_id]
+      @segments = @grouping.segments
+      render :partial => "segments" if request.xhr?
     else
-      @grouping.recalculate_segments
-      @segments = @grouping.segments
+      job_id = SegmentsWorker.perform_async(@grouping.id)
+      redirect_to  software_product_grouping_segments_path(@software_product, @grouping, :job_id => job_id, :pb_kind => "segments")
     end
+  end
+
+  def rebuild_segments
+    job_id = RebuildSegmentsWorker.perform_async(@grouping.id)
+    redirect_to  software_product_grouping_segments_path(@software_product, @grouping, :job_id => job_id, :pb_kind => "rebuild_segments")
   end
 
   private
@@ -20,7 +30,7 @@ class SegmentsController < ApplicationController
     end
 
     def add_breadcrumbs
-      add_breadcrumb "Список программных продуктов", :software_products_path
+      add_breadcrumb "Список программных продуктов", software_products_path
       add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product)
     end
 end

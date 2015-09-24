@@ -1,10 +1,12 @@
-<table class="table table-bordered table-hover">
-  <% @segments.roots.each do |segment| %>
-    <tr class="info">
-      <td colspan=2>
-        <%= segment.title %>(<%= link_to segment.research_items.count, software_product_research_items_path(@software_product, :segment_id => segment.id) %>)
-      </td>
-    </tr>
-    <%= render :partial => 'segment_children', :locals => {segment: segment} if segment.has_children? %>
-  <% end %>
-</table>
+<%= render :partial => 'commons/breadcrumbs' %>
+<% if params[:job_id] %>
+  <div class="js-progress">
+    <p><%= I18n.t("progressbar.title.#{params[:pb_kind]}") %></p>
+    <div class="progress">
+      <div class="js-progressbar progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" data-jobid=<%= params[:job_id] %>></div>
+    </div>
+  </div>
+  <div class="js-panel-body"></div>
+<% else %>
+  <%= render :partial => 'segments' %>
+<% end %>

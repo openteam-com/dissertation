@@ -16,9 +16,9 @@ queryForPercentage = () ->
         setTimeout(queryForPercentage, 500)
       else
         $(".js-progress").hide()
-        getCSVInfo()
+        getPartial()
 
-getCSVInfo = () ->
+getPartial = () ->
   $.ajax
     success: (data) ->
       $(".js-panel-body").append(data)

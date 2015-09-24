@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :research_items, :only => :index
     resources :groupings, :except => [:index, :show] do
       resources :grouping_parameters, :only => [:edit, :update, :destroy]
-      resources :segments, :only => [:index]
+      resources :segments, :only => [:index] do
+        get 'rebuild_segments', :on => :collection
+      end
     end
   end
 

@@ -1,7 +1,11 @@
 <% segment.children.order(:title).each do |child| %>
-  <tr>
-    <td><%= child.title %></td>
-    <td><%= link_to child.research_items.count, software_product_research_items_path(@software_product, :segment_id => child.id) %></td>
-  </tr>
-  <%= render :partial => 'segment_children', :locals => {segment: child} if child.has_children? %>
+  <ul>
+    <li>
+      <%= link_to software_product_research_items_path(@software_product, :segment_id => child.id) do %>
+        <%= child.title %>
+         <span class="badge"><%= child.research_items.count %></span>
+      <% end %>
+    </li>
+    <%= render :partial => 'segment_children', :locals => {segment: child} if child.has_children? %>
+  </ul>
 <% end %>

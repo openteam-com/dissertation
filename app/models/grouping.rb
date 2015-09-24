@@ -7,18 +7,14 @@ class Grouping < ActiveRecord::Base
 
   validates_presence_of :title
 
-  def rebuild_segments
-    Segment.roots.where(:grouping_value_id => grouping_parameters.map(&:grouping_values).flatten).destroy_all
-    recalculate_segments
+  def segments_count
+    values_array = grouping_parameters.map{ |parameter| parameter.grouping_values.count}
+    values_array.map.with_index{ |_,index| multiply_array(values_array, index+1) }.inject(:+)
   end
 
-  def recalculate_segments(previous_segment = nil, grouping_parameter = nil, level = 0)
-    grouping_parameter ||= grouping_parameters.first
-    grouping_parameter.grouping_values.each do |value|
-      segment_title = value.title
-      segment = Segment.create! :title => segment_title, :grouping_value => value, :parent => previous_segment, :grouping => self
-      recalculate_segments(segment, grouping_parameters[level+1], level+1) if level+1 < grouping_parameters.count
-    end
+  private
+  def multiply_array(arr, quantity)
+    arr.take(quantity).inject(:*)
   end
 end
 
