@@ -19,7 +19,6 @@ class SoftwareProductsController < ApplicationController
 
   def show
     @software_product = SoftwareProduct.find(params[:id])
-    render :partial => "csv_info" if request.xhr?
     add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product)
   end
 

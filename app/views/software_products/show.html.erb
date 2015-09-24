@@ -79,35 +79,38 @@
 </div>
 
 <div class="software-product-attribute">
-  <p class="pull-left">
-    Модели:
-    <%= link_to  new_software_product_replication_model_path(@software_product), :title => "Добавить модель" do %>
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-    <% end %>
-  </p>
-  <div class="models">
-    <% if @software_product.replication_models.present? %>
-      <% @software_product.replication_models.each do |model| %>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <%= model.title %>
-            <%= link_to edit_software_product_replication_model_path(@software_product, model), :title => "Редактировать модель" do %>
-              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-            <% end %>
-            <%= link_to software_product_replication_model_path(@software_product, model), :title => "Удалить модель", :method => :delete, :data => {:confirm => "Вы уверены?"} do %>
-              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            <% end %>
-            <p>Трудовые ресурсы:</p>
-            <ul>
-              <% model.workforces.each do |workforce| %>
-                <li><%= workforce.specialists %></li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">Модели:</div>
+    <div class="panel-body">
+      <%= link_to  new_software_product_replication_model_path(@software_product), :title => "Добавить модель", :class => "btn btn-success pull-right" do %>
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Добавить модель
       <% end %>
-    <% else %>
-      <h4>Не добавлено ни одной модели</h4>
-    <% end %>
+      <div class="models">
+        <% if @software_product.replication_models.present? %>
+          <% @software_product.replication_models.each do |model| %>
+            <div class="model">
+              <p>
+                <%= model.title %>
+                <%= link_to edit_software_product_replication_model_path(@software_product, model), :title => "Редактировать модель" do %>
+                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                <% end %>
+                <%= link_to software_product_replication_model_path(@software_product, model), :title => "Удалить модель", :method => :delete, :data => {:confirm => "Вы уверены?"} do %>
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <% end %>
+              </p>
+              <p>Трудовые ресурсы:</p>
+              <ul>
+                <% model.workforces.each do |workforce| %>
+                  <li><%= workforce.specialists %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        <% else %>
+          <h4>Не добавлено ни одной модели</h4>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

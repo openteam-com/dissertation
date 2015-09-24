@@ -1,7 +1,8 @@
 $ ->
   if $('.js-progressbar').length
-    queryForPercentage()
     $(".js-csv-wrapper").hide()
+    queryForPercentage()
+  return
 
 queryForPercentage = () ->
   job_id = $('.js-progressbar').data('jobid')
@@ -12,13 +13,10 @@ queryForPercentage = () ->
     success: (data) ->
       percentage = 'width: ' + data['percent'] + '%;'
       $('.js-progressbar').attr('style', percentage)
-      if  data['percent'] != 100
+      if data['percent'] != 100
         setTimeout(queryForPercentage, 500)
       else
-        $(".js-progress").hide()
-        getPartial()
+        window.location = window.location.pathname
+      return
 
-getPartial = () ->
-  $.ajax
-    success: (data) ->
-      $(".js-panel-body").append(data)
+  return

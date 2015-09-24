@@ -7,12 +7,19 @@ class SegmentsController < ApplicationController
     if @grouping.segments.present? && !params[:job_id]
       @segments = @grouping.segments
     elsif params[:job_id]
-      @segments = @grouping.segments
-      render :partial => "segments" if request.xhr?
+      return
     else
       job_id = SegmentsWorker.perform_async(@grouping.id)
       redirect_to  software_product_grouping_segments_path(@software_product, @grouping, :job_id => job_id, :pb_kind => "segments")
     end
+  end
+
+  def edit
+
+  end
+
+  def update
+
   end
 
   def rebuild_segments
