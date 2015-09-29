@@ -24,9 +24,34 @@ ru:
       grouping_parameters:
         grouping_field: 'Поле для группировки'
         kind: 'Тип параметра групировки'
+      segment:
+        replication_models: 'Варианты поставки'
+      quality_grouping_values:
+        title: 'Название'
+        values: 'Значения'
+      quantity_grouping_values:
+        title: 'Название'
+        min_count: 'Минимальное значение'
+        max_count: 'Максимальное значение'
+      alternative: &alternative
+        parameter1: "Емкость и тенденция изменения сегмента"
+        parameter2: "Уровень информационной инфраструктуры"
+        parameter3: "Возможность расширения ассортимента ПП и услуг"
+        parameter4: "Соответствие характеристик ПП потребностям потребителей"
+        parameter5: "Уровень уникальности ПП"
+        parameter6: "Присутствие ПП конкурентов и известность брендов"
+        parameter7: "Доступность потребителей"
+        parameter8: "Технологическая мобильность компании"
+        parameter9: "Опыт компании по обслуживанию потребителей"
+        parameter10: "Соответствие стратегическим целям и ключевой компетентности компании"
+      parameter_weight:
+        <<: *alternative
+
     hints:
       user:
         password_confirmation: 'минимум 8 символов'
+      segment:
+        replication_models: 'выберите вариант поставки'
     placeholders:
       user:
         email: 'Введите e-mail'

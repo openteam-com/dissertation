@@ -5,6 +5,9 @@ ru:
       replication_model: "модель тиражирования"
       grouping: "группировку"
       grouping_parameter: "параметр группировки"
+      segment: "сегмент"
+      alternative: "альтенативу"
+      parameter_weight: "веса параметров"
   enumerize:
     title:
       saas: "SAAS"
@@ -25,6 +28,6 @@ ru:
     title:
       csv_upload: "Выполняется загрузка данных из файла:"
       destroy_research_items: "Выполняется удаление объектов исследования:"
-      segments: "Выполнется подсчет сегментов"
-      rebuild_segments: "Выполнется пересчет сегментов"
+      segments: "Выполняется подсчет сегментов"
+      rebuild_segments: "Выполняется пересчет сегментов"
 

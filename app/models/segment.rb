@@ -1,12 +1,22 @@
 class Segment < ActiveRecord::Base
-  has_many :item_segments,      :dependent => :destroy
-  has_many :research_items,     :through => :item_segments
+  has_many :item_segments,              :dependent => :destroy
+  has_many :research_items,             :through => :item_segments
+  has_many :replication_models,         :through => :alternatives
+  has_many :alternatives,               :dependent => :destroy
   belongs_to :grouping
-  belongs_to :grouping_value,   :polymorphic => true
+  belongs_to :grouping_value,           :polymorphic => true
 
   has_ancestry
 
   after_create :associate_research_items
+
+  def full_name
+    path.pluck(:title).join('/')
+  end
+
+  def self.childless
+    select{ |segment| segment.is_childless?}
+  end
 
   private
 

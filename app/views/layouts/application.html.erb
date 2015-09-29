@@ -39,7 +39,7 @@
       <% end %>
       <div class="col-xs-12">
         <div class="content-wrapper">
-          <%= yield %>
+          <%= content_for?(:segments) ? yield(:segments) : yield %>
         </div>
       </div>
     </div>

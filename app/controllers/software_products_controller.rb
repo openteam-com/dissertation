@@ -1,6 +1,4 @@
 class SoftwareProductsController < ApplicationController
-  before_action :authenticate_user!
-
   add_breadcrumb "Список программных продуктов", :software_products_path
 
   def index

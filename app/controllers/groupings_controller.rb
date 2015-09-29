@@ -1,5 +1,5 @@
 class GroupingsController < ApplicationController
-  before_action :authenticate_user!, :software_product, :add_breadcrumbs
+  before_action :software_product, :add_breadcrumbs
 
   def new
     add_breadcrumb "Новая группировка", new_software_product_grouping_path(@software_product)

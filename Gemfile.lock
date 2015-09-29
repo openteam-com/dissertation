@@ -45,6 +45,7 @@ GEM
     autoprefixer-rails (6.0.3)
       execjs
       json
+    awesome_print (1.6.1)
     bcrypt (3.1.10)
     bootstrap-kaminari-views (0.0.5)
       kaminari (>= 0.13)
@@ -245,6 +246,7 @@ PLATFORMS
 DEPENDENCIES
   ancestry
   annotate
+  awesome_print
   bootstrap-kaminari-views
   bootstrap-sass
   breadcrumbs_on_rails

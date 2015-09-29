@@ -1,14 +1,28 @@
 <div class="segments">
-  <ul>
-    <% @segments.roots.each do |segment| %>
-      <li>
-        <%= link_to software_product_research_items_path(@software_product, :segment_id => segment.id) do %>
-          <%= segment.title %>
-          <span class="badge"><%= segment.research_items.count %></span>
-        <% end %>
-      </li>
-      <%= render :partial => 'segment_children', :locals => {segment: segment} if segment.has_children? %>
-    <% end %>
-  </ul>
-  <%= link_to "Пересчитать сегменты", rebuild_segments_software_product_grouping_segments_path(@software_product, @grouping), :class => "btn btn-warning pull-right" %>
+  <% if params[:childless] %>
+    <ul>
+      <% @segments.childless.each do |segment| %>
+        <li>
+          <%= link_to software_product_research_items_path(@software_product, :segment_id => segment.id) do %>
+            <%= segment.full_name %>
+            <span class="badge"><%= segment.research_items.count %></span>
+          <% end %>
+          <%= render :partial => 'replication_models', :locals => {:segment => segment} %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <ul>
+      <% @segments.roots.each do |segment| %>
+        <li>
+          <%= link_to software_product_research_items_path(@software_product, :segment_id => segment.id) do %>
+            <%= segment.title %>
+            <span class="badge"><%= segment.research_items.count %></span>
+          <% end %>
+        </li>
+        <%= render :partial => 'segment_children', :locals => {segment: segment} if segment.has_children? %>
+      <% end %>
+    </ul>
+    <%= link_to "Пересчитать сегменты", rebuild_segments_software_product_grouping_segments_path(@software_product, @grouping), :class => "btn btn-primary pull-right" %>
+  <% end %>
 </div>

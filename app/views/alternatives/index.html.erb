@@ -1,0 +1,24 @@
+<div class="table-responsive">
+  <table class="table table-hover table-condensed table-bordered">
+    <thead>
+      <th>Название</th>
+      <th>Модель распростананеия</th>
+      <th>Коэфициент привлекательности</th>
+      <% (1..10).each do |index| %>
+        <th><%= I18n.t("simple_form.labels.alternative.parameter#{index}") %></th>
+      <% end %>
+    </thead>
+    <tbody>
+      <% @alternatives.each do |alternative| %>
+        <tr>
+          <td><%= link_to alternative.segment_full_name, edit_software_product_grouping_alternative_path(@software_product, @grouping, alternative) %></td>
+          <td><%= alternative.replication_model_title %></td>
+          <td><%= alternative.final_coef %></td>
+          <% (1..10).each do |index| %>
+            <td><%= alternative.pert(index) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

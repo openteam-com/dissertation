@@ -30,4 +30,5 @@ end
 group :development do
   gem 'annotate'
   gem 'hirb'
+  gem "awesome_print"
 end

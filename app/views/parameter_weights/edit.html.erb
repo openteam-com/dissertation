@@ -1,0 +1,6 @@
+<%= simple_form_for [@software_product, @grouping, @parameter_weight] do |f| %>
+  <% (1..10).each do |index| %>
+      <%= f.input "parameter#{index}" %>
+  <% end %>
+  <%= f.button :submit %>
+<% end %>

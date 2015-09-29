@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923040546) do
+ActiveRecord::Schema.define(version: 20150928085222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alternatives", force: :cascade do |t|
+    t.integer  "segment_id"
+    t.integer  "replication_model_id"
+    t.text     "parameter1",           default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter2",           default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter3",           default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter4",           default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter5",           default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter6",           default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter7",           default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter8",           default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter9",           default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter10",          default: "---\n- 0\n- 0\n- 0\n"
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+  end
 
   create_table "grouping_parameters", force: :cascade do |t|
     t.string   "grouping_field"
@@ -36,6 +53,22 @@ ActiveRecord::Schema.define(version: 20150923040546) do
     t.integer  "segment_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+  end
+
+  create_table "parameter_weights", force: :cascade do |t|
+    t.float    "parameter1",          default: 0.0
+    t.integer  "software_product_id"
+    t.float    "parameter2",          default: 0.0
+    t.float    "parameter3",          default: 0.0
+    t.float    "parameter4",          default: 0.0
+    t.float    "parameter5",          default: 0.0
+    t.float    "parameter6",          default: 0.0
+    t.float    "parameter7",          default: 0.0
+    t.float    "parameter8",          default: 0.0
+    t.float    "parameter9",          default: 0.0
+    t.float    "parameter10",         default: 0.0
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "quality_grouping_values", force: :cascade do |t|

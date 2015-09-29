@@ -12,6 +12,10 @@ class Grouping < ActiveRecord::Base
     values_array.map.with_index{ |_,index| multiply_array(values_array, index+1) }.inject(:+)
   end
 
+  def alternatives
+    segments.flat_map(&:alternatives)
+  end
+
   private
   def multiply_array(arr, quantity)
     arr.take(quantity).inject(:*)

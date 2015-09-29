@@ -1,0 +1,13 @@
+<%= link_to edit_software_product_grouping_segment_path(@software_product, @grouping, segment), :title => "Добавить модели" do %>
+  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+<% end %>
+<% if segment.replication_models.present? %>
+  <div>
+    <p>Варианты поставки:</p>
+    <ul>
+      <% segment.replication_models.each do |model| %>
+        <li> <%= model.title %> </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

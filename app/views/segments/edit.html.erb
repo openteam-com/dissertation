@@ -1,0 +1,7 @@
+<%= simple_form_for [@software_product, @grouping, @segment], html: { class: 'form-horizontal' }, wrapper: :horizontal_form,
+  wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+} do |f| %>
+  <%= f.association :replication_models, :as => :check_boxes %>
+  <%= f.button :submit, :class => "pull-right btn-success" %>
+<% end %>

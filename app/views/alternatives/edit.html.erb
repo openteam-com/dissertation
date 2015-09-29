@@ -1,0 +1,14 @@
+<%= simple_form_for [@software_product, @grouping, @alternative] do |f| %>
+  <% (1..10).each do |index| %>
+    <%= f.label "parameter#{index}" %>
+    <div class="parameter-values">
+      <%= f.input "parameter#{index}", :as => :integer, :label => false, :hint => "Оптимистичный",
+        :input_html => {:name => "alternative[parameter#{index}][]", :min => 0, :max => 10, :value => @alternative.send("parameter#{index}")[0]} %>
+      <%= f.input "parameter#{index}", :as => :integer, :label => false, :hint => "Наибольший",
+        :input_html => {:name => "alternative[parameter#{index}][]", :min => 0, :max => 10, :value => @alternative.send("parameter#{index}")[1]} %>
+      <%= f.input "parameter#{index}", :as => :integer, :label => false, :hint => "Пессимистичный",
+        :input_html => {:name => "alternative[parameter#{index}][]", :min => 0, :max => 10, :value => @alternative.send("parameter#{index}")[2]} %>
+    </div>
+  <% end %>
+  <%= f.button :submit %>
+<% end %>

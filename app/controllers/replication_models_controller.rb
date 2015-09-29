@@ -1,5 +1,5 @@
 class ReplicationModelsController < ApplicationController
-  before_action :authenticate_user!, :software_product, :add_breadcrumbs
+  before_action :software_product, :add_breadcrumbs
 
   def new
     add_breadcrumb "Новая модель тиражирования", new_software_product_replication_model_path(@software_product)

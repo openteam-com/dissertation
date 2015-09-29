@@ -1,5 +1,5 @@
 class GroupingParametersController < ApplicationController
-  before_action :authenticate_user!, :software_product, :grouping, :add_breadcrumbs
+  before_action :software_product, :grouping, :add_breadcrumbs
 
   def edit
     @grouping_parameter = GroupingParameter.find(params[:id])
