@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
     resources :groupings, :except => [:index, :show] do
       resources :grouping_parameters, :only => [:edit, :update, :destroy]
-      resources :alternatives, :only => [:index, :edit, :update]
       resources :parameter_weights, :only => [:show, :edit, :update]
+      resources :alternatives, :only => [:index, :edit, :update]
 
       resources :segments, :only => [:index, :edit, :update] do
         get 'rebuild_segments', :on => :collection

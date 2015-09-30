@@ -4,7 +4,7 @@ class ReplicationModel < ActiveRecord::Base
   has_many :alternatives,               :dependent => :destroy
   has_many :segments,                   :through => :alternatives
 
-  validates_presence_of :title, :fixed_costs, :variable_costs
+  validates_presence_of :title, :fixed_costs, :variable_costs, :investition_percent
 
   accepts_nested_attributes_for :workforces, :allow_destroy => true, :reject_if => :all_blank
 
@@ -23,4 +23,5 @@ end
 #  software_product_id :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  investition_percent :integer
 #

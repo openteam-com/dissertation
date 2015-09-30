@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928085222) do
+ActiveRecord::Schema.define(version: 20150930071234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,10 @@ ActiveRecord::Schema.define(version: 20150928085222) do
     t.text     "parameter10",          default: "---\n- 0\n- 0\n- 0\n"
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
+    t.float    "average_cost",         default: 0.0
+    t.integer  "pessimistic_profit",   default: 0
+    t.integer  "real_profit",          default: 0
+    t.integer  "optimistic_profit",    default: 0
   end
 
   create_table "grouping_parameters", force: :cascade do |t|
@@ -56,19 +60,19 @@ ActiveRecord::Schema.define(version: 20150928085222) do
   end
 
   create_table "parameter_weights", force: :cascade do |t|
-    t.float    "parameter1",          default: 0.0
-    t.integer  "software_product_id"
-    t.float    "parameter2",          default: 0.0
-    t.float    "parameter3",          default: 0.0
-    t.float    "parameter4",          default: 0.0
-    t.float    "parameter5",          default: 0.0
-    t.float    "parameter6",          default: 0.0
-    t.float    "parameter7",          default: 0.0
-    t.float    "parameter8",          default: 0.0
-    t.float    "parameter9",          default: 0.0
-    t.float    "parameter10",         default: 0.0
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.float    "parameter1",  default: 0.0
+    t.float    "parameter2",  default: 0.0
+    t.float    "parameter3",  default: 0.0
+    t.float    "parameter4",  default: 0.0
+    t.float    "parameter5",  default: 0.0
+    t.float    "parameter6",  default: 0.0
+    t.float    "parameter7",  default: 0.0
+    t.float    "parameter8",  default: 0.0
+    t.float    "parameter9",  default: 0.0
+    t.float    "parameter10", default: 0.0
+    t.integer  "grouping_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "quality_grouping_values", force: :cascade do |t|
@@ -95,6 +99,7 @@ ActiveRecord::Schema.define(version: 20150928085222) do
     t.integer  "software_product_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "investition_percent"
   end
 
   create_table "research_items", force: :cascade do |t|

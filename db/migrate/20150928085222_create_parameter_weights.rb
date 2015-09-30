@@ -3,8 +3,8 @@ class CreateParameterWeights < ActiveRecord::Migration
     create_table :parameter_weights do |t|
       (1..10).each do |index|
         t.float "parameter#{index}", :default => 0
-        t.belongs_to :software_product
       end
+      t.belongs_to :grouping
       t.timestamps null: false
     end
   end

@@ -3,20 +3,31 @@
     <thead>
       <th>Название</th>
       <th>Модель распростананеия</th>
-      <th>Коэфициент привлекательности</th>
-      <% (1..10).each do |index| %>
-        <th><%= I18n.t("simple_form.labels.alternative.parameter#{index}") %></th>
-      <% end %>
+      <th>Объем продаж</th>
+      <th>Объем инвестиций</th>
+      <th>Прогнозируемая прибыль</th>
+      <th>Интегральный показатель привлекательности</th>
+      <th>Трудовые ресурсы</th>
     </thead>
     <tbody>
       <% @alternatives.each do |alternative| %>
         <tr>
-          <td><%= link_to alternative.segment_full_name, edit_software_product_grouping_alternative_path(@software_product, @grouping, alternative) %></td>
-          <td><%= alternative.replication_model_title %></td>
-          <td><%= alternative.final_coef %></td>
-          <% (1..10).each do |index| %>
-            <td><%= alternative.pert(index) %></td>
-          <% end %>
+          <td><%= alternative.segment_full_name %></td>
+          <td>
+            <%= alternative.replication_model_title %>
+            (<%= alternative.investition_percent %>%)
+          </td>
+          <td><%= alternative.sales %></td>
+          <td><%= alternative.investiton %></td>
+          <td>
+            <%= alternative.profit %>
+            <%= link_to "Изменить", edit_software_product_grouping_alternative_path(@software_product, @grouping, alternative, :profit => true)  %>
+          </td>
+          <td>
+            <%= alternative.attractiveness %>
+            <%= link_to "Изменить", edit_software_product_grouping_alternative_path(@software_product, @grouping, alternative)  %>
+          </td>
+          <td><%= alternative.workforce_values %></td>
         </tr>
       <% end %>
     </tbody>

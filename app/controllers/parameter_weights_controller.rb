@@ -1,5 +1,5 @@
 class ParameterWeightsController < ApplicationController
-  before_action :software_product, :grouping, :add_breadcrumbs
+  before_action :software_product, :grouping
 
   layout 'segments'
 
@@ -33,10 +33,5 @@ class ParameterWeightsController < ApplicationController
         array
       }
       params.require(:parameter_weight).permit(parameters_array)
-    end
-
-    def add_breadcrumbs
-      add_breadcrumb "Список программных продуктов", software_products_path
-      add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product)
     end
 end

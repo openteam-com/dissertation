@@ -1,5 +1,5 @@
 class SegmentsController < ApplicationController
-  before_action :software_product, :grouping, :add_breadcrumbs
+  before_action :software_product, :grouping
 
   layout 'segments'
 
@@ -41,11 +41,5 @@ class SegmentsController < ApplicationController
 
     def groupings_params
       params.require(:segment).permit(:replication_model_ids => [])
-    end
-
-    def add_breadcrumbs
-      add_breadcrumb "Список программных продуктов", software_products_path
-      add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product)
-      add_breadcrumb "Сегменты", software_product_grouping_segments_path(@software_product, @grouping)
     end
 end

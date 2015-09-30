@@ -33,7 +33,8 @@ class ReplicationModelsController < ApplicationController
     end
 
     def replication_model_params
-      params.require(:replication_model).permit(:title, :fixed_costs, :variable_costs, :workforces_attributes => [:id, :specialists, :fixed_resources, :variable_resources, :_destroy])
+      params.require(:replication_model).permit(:title, :fixed_costs, :variable_costs, :investition_percent,
+                                                :workforces_attributes => [:id, :specialists, :fixed_resources, :variable_resources, :_destroy])
     end
 
     def add_breadcrumbs

@@ -3,6 +3,7 @@
   <%= f.input :title, :include_blank => false%>
   <%= f.input :fixed_costs %>
   <%= f.input :variable_costs %>
+  <%= f.input :investition_percent, :input_html => { :min => 0, :max => 100 } %>
   <%= f.simple_fields_for :workforces, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |wf| %>
     <div class="panel panel-default">
       <div class="panel-body">

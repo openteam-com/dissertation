@@ -1,7 +1,10 @@
 class Grouping < ActiveRecord::Base
-  has_many :segments, :dependent => :destroy
-  has_many :grouping_parameters, :dependent => :destroy
+  has_many :segments,             :dependent => :destroy
+  has_many :grouping_parameters,  :dependent => :destroy
+  has_one :parameter_weight,      :dependent => :destroy
   belongs_to :software_product
+
+  after_create :create_parameters_weight
 
   accepts_nested_attributes_for :grouping_parameters, :allow_destroy => true, :reject_if => :all_blank
 
@@ -19,6 +22,10 @@ class Grouping < ActiveRecord::Base
   private
   def multiply_array(arr, quantity)
     arr.take(quantity).inject(:*)
+  end
+
+  def create_parameters_weight
+    create_parameter_weight!
   end
 end
 

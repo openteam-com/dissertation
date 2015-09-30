@@ -1,5 +1,5 @@
 class AlternativesController < ApplicationController
-  before_action :software_product, :grouping, :add_breadcrumbs
+  before_action :software_product, :grouping
 
   layout 'segments'
 
@@ -27,16 +27,11 @@ class AlternativesController < ApplicationController
     end
 
     def alternative_params
+      profit_array = %w(average_cost pessimistic_profit real_profit optimistic_profit)
       parameters_array = (1..10).inject([]){ |array,index|
         array.push("parameter#{index}" => [])
         array
       }
-      params.require(:alternative).permit(parameters_array)
-    end
-
-    def add_breadcrumbs
-      add_breadcrumb "Список программных продуктов", software_products_path
-      add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product)
-      add_breadcrumb "Альтернативы", software_product_grouping_alternatives_path(@software_product, @grouping)
+      params.require(:alternative).permit(profit_array + parameters_array)
     end
 end

@@ -15,6 +15,7 @@ ru:
         title: 'Название модели'
         fixed_costs: 'Постоянные затраты'
         variable_costs: 'Переменные затраты'
+        investition_percent: 'Процент объема инвестиций'
       workforces:
         specialists: 'Группа специалистов'
         fixed_resources: 'Постоянные ресурсы'
