@@ -7,7 +7,7 @@
   <%= f.simple_fields_for :workforces, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |wf| %>
     <div class="panel panel-default">
       <div class="panel-body">
-        <%= wf.input :specialists %>
+        <%= wf.input :specialists, :as => :select, :collection => @software_product.workforce_directories.pluck(:specialists) %>
         <%= wf.input :fixed_resources %>
         <%= wf.input :variable_resources %>
         <%= wf.link_to_remove "Удалить трудовые ресурсы", :class => "pull-right" %>

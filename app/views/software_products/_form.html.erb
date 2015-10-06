@@ -1,6 +1,16 @@
 <%= render :partial => 'commons/breadcrumbs' %>
-<%= simple_form_for @software_product, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+<%= simple_nested_form_for @software_product, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
   <%= f.input :title %>
+  <%= f.simple_fields_for :workforce_directories, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |wf| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= wf.input :specialists %>
+        <%= wf.input :available_resources %>
+        <%= wf.link_to_remove "Удалить трудовые ресурсы", :class => "pull-right" %>
+      </div>
+    </div>
+  <% end %>
+  <%= f.link_to_add "Добавить трудовые русурсы", :workforce_directories, :class => "btn btn-primary" %>
   <%= f.input :user_id, :as => :hidden, :input_html => {:value => current_user.id} %>
   <%= f.button :submit, :class => "pull-right btn-success" %>
 <% end %>

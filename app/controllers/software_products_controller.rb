@@ -57,6 +57,7 @@ class SoftwareProductsController < ApplicationController
 
   private
     def software_product_params
-      params.require(:software_product).permit(:title, :user_id, :research_items_csv)
+      params.require(:software_product).permit(:title, :user_id, :research_items_csv,
+                                              :workforce_directories_attributes => [:id, :specialists, :available_resources, :_destroy])
     end
 end

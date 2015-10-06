@@ -5,6 +5,7 @@ group :default do
   gem 'bootstrap-sass'
   gem 'bootstrap-kaminari-views'
   gem 'breadcrumbs_on_rails'
+  gem 'rglpk'
   gem 'coffee-rails', '~> 4.1.0'
   gem 'configliere'
   gem 'devise'

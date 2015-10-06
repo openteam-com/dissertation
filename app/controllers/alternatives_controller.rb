@@ -5,6 +5,7 @@ class AlternativesController < ApplicationController
 
   def index
     @alternatives = @grouping.alternatives
+    @problem = RglpkWrapper.new(@grouping.segments.joins(:alternatives).uniq, @software_product).solve
   end
 
   def edit

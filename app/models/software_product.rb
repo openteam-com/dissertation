@@ -1,11 +1,14 @@
 class SoftwareProduct < ActiveRecord::Base
-  has_many :replication_models, :dependent => :destroy
-  has_many :research_items,     :dependent => :destroy
-  has_many :groupings,          :dependent => :destroy
+  has_many :replication_models,    :dependent => :destroy
+  has_many :research_items,        :dependent => :destroy
+  has_many :groupings,             :dependent => :destroy
+  has_many :workforce_directories, :dependent => :destroy
   belongs_to :user
 
   has_attached_file :research_items_csv
   validates_attachment_content_type :research_items_csv, :content_type => /.*csv\Z/
+
+  accepts_nested_attributes_for :workforce_directories, :allow_destroy => true, :reject_if => :all_blank
 
   validates_presence_of :title
 

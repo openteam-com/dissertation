@@ -21,8 +21,7 @@ class Alternative < ActiveRecord::Base
 
   def attractiveness
     (1..10).inject(0){|sum, index|
-      sum+= pert(index) * parameter_weight.normalize_weight(index)
-      sum
+      sum + pert(index) * parameter_weight.normalize_weight(index)
     }
   end
 
@@ -39,7 +38,10 @@ class Alternative < ActiveRecord::Base
   end
 
   def workforce_values
-    workforces.map{ |workforce| workforce.fixed_resources + profit_pert * workforce.variable_resources}
+    workforces.inject({}){ |hash, workforce|
+      hash[workforce.specialists] = workforce.fixed_resources + profit_pert * workforce.variable_resources
+      hash
+    }
   end
 
   private
