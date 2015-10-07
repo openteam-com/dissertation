@@ -290,6 +290,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake
   ancestry
   annotate
   awesome_print

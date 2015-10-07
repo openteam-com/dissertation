@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 group :default do
+  gem 'airbrake'
   gem 'ancestry'
   gem 'bootstrap-kaminari-views'
   gem 'bootstrap-sass'
