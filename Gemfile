@@ -27,6 +27,7 @@ group :default do
   gem 'sidekiq-status'
   gem 'simple_form'
   gem 'uglifier', '>= 1.3.0'
+  gem 'unicorn'
 end
 
 group :development do
