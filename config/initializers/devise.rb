@@ -9,4 +9,5 @@ Devise.setup do |config|
   config.expire_all_remember_me_on_sign_out = true
   config.password_length = 8..72
   config.sign_out_via = :delete
+  config.secret_key = Settings["devise.secret"]
 end
