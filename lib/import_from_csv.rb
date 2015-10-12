@@ -23,7 +23,7 @@ class ImportFromCsv
   end
 
   def prepare_hash
-    csv_data = CSV.read csv_path
+    csv_data = CSV.read(csv_path, { :col_sep => ";" })
     headers = csv_data.shift.map {|i| i.to_s }.reject{ |header| header.blank? }
     @prepare_hash ||= csv_data.map {|row| row.map {|cell| cell.to_s.strip } }
     @prepare_hash.map {|row| Hash[*headers.zip(row).flatten] }
