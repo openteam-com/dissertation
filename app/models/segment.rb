@@ -33,7 +33,7 @@ class Segment < ActiveRecord::Base
 
   def quantity_item(item)
     item_parameter_value = item.data[grouping_value.grouping_parameter.grouping_field].to_i
-    item_segments.create(research_item_id: item.id) if item_parameter_value >= grouping_value.min_count && item_parameter_value <= grouping_value.max_count
+    item_segments.create(research_item_id: item.id) if item_parameter_value >= grouping_value.min_count.to_i && item_parameter_value <= grouping_value.max_count.to_i
   end
 end
 
