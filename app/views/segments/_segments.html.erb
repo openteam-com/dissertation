@@ -1,7 +1,7 @@
 <div class="segments">
   <% if params[:childless] %>
     <ul>
-      <% @segments.childless.each do |segment| %>
+      <% @segments.childless.sort_by(&:full_name).each do |segment| %>
         <li>
           <%= link_to software_product_research_items_path(@software_product, :segment_id => segment.id) do %>
             <%= segment.full_name %>
@@ -13,7 +13,7 @@
     </ul>
   <% else %>
     <ul>
-      <% @segments.roots.each do |segment| %>
+      <% @segments.roots.sort_by(&:full_name).each do |segment| %>
         <li>
           <%= link_to software_product_research_items_path(@software_product, :segment_id => segment.id) do %>
             <%= segment.title %>
