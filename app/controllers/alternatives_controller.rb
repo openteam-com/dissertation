@@ -4,8 +4,8 @@ class AlternativesController < ApplicationController
   layout 'segments'
 
   def index
-    @alternatives = @grouping.alternatives
-    @problem = RglpkWrapper.new(@grouping.segments.joins(:alternatives).uniq, @software_product).solve
+    @alternatives = @grouping.alternatives.sort_by(&:segment_full_name)
+    @problem = RglpkWrapper.new(@alternatives.map(&:segment).uniq, @software_product).solve
   end
 
   def edit
