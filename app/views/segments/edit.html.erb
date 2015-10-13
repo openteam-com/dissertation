@@ -2,6 +2,7 @@
   wrapper_mappings: {
   check_boxes: :horizontal_radio_and_checkboxes,
 } do |f| %>
+  <p><b>Название сегмента:   </b><%= @segment.full_name %></p>
   <%= f.association :replication_models, :as => :check_boxes, :collection => @software_product.replication_models %>
   <%= f.button :submit, :class => "pull-right btn-success" %>
 <% end %>
