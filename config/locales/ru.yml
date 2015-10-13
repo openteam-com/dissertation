@@ -8,6 +8,8 @@ ru:
       segment: "сегмент"
       alternative: "альтенативу"
       parameter_weight: "веса параметров"
+      accomodation_wave: "волну размещения"
+      advertising_platform: "рекламную площадку"
   enumerize:
     title:
       saas: "SAAS"
@@ -17,6 +19,10 @@ ru:
     kind:
       quantity: "Количественная"
       quality: "Качественная"
+    price_type:
+      thousand_clicks: "Стоимость тысячи кликов"
+      day: "Стоимость размещения в день"
+      click: "Стоимость клика"
   views:
     pagination:
       first: "&laquo; Первая"

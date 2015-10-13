@@ -10,11 +10,18 @@ Rails.application.routes.draw do
     resources :groupings, :except => [:index, :show] do
       resources :grouping_parameters, :only => [:edit, :update, :destroy]
       resources :parameter_weights, :only => [:show, :edit, :update]
-      resources :alternatives, :only => [:index, :edit, :update]
+      resources :alternatives, :only => [:index, :edit, :update] do
+        resources :accomodation_waves, :except => [:index, :show] do
+          resources :advertising_platforms, :only => [:edit, :update]
+        end
+      end
+
 
       resources :segments, :only => [:index, :edit, :update] do
         get 'rebuild_segments', :on => :collection
       end
+
+     get 'accomodation_waves', :on => :member
     end
 
     patch 'upload_csv'

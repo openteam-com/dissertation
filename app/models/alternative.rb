@@ -2,6 +2,8 @@ class Alternative < ActiveRecord::Base
   belongs_to :segment
   belongs_to :replication_model
 
+  has_many :accomodation_waves, :class_name => "AccomodationWave", :dependent => :destroy
+
   delegate :full_name, :to => :segment, :prefix => true
   delegate :title, :to => :replication_model, :prefix => true
   delegate :investition_percent, :fixed_costs, :variable_costs, :workforces, :to => :replication_model

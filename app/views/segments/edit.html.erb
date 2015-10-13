@@ -2,6 +2,6 @@
   wrapper_mappings: {
   check_boxes: :horizontal_radio_and_checkboxes,
 } do |f| %>
-  <%= f.association :replication_models, :as => :check_boxes %>
+  <%= f.association :replication_models, :as => :check_boxes, :collection => @software_product.replication_models %>
   <%= f.button :submit, :class => "pull-right btn-success" %>
 <% end %>

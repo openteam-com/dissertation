@@ -1,6 +1,8 @@
 class GroupingsController < ApplicationController
   before_action :software_product, :add_breadcrumbs
 
+  layout 'segments', :only => [:accomodation_waves]
+
   def new
     add_breadcrumb "Новая группировка", new_software_product_grouping_path(@software_product)
     @grouping = @software_product.groupings.new
@@ -25,6 +27,12 @@ class GroupingsController < ApplicationController
   def destroy
     Grouping.find(params[:id]).destroy
     redirect_to software_product_path(@software_product)
+  end
+
+  def accomodation_waves
+    @grouping = Grouping.find(params[:id])
+    @problem = RglpkWrapper.new(@grouping.segments.joins(:alternatives).uniq, @software_product).solve
+    @alternatives = Alternative.where(:segment_id => @grouping.segments.pluck(:id)).map.with_index{ |alternative, index| alternative if @problem.cols[index].get_prim.round == 1 }.compact
   end
 
   private

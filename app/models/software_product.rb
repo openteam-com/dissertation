@@ -21,7 +21,7 @@ class SoftwareProduct < ActiveRecord::Base
   end
 
   def uniq_values_for_quality_values(option)
-    research_items.map {|item| item.data[option]}.uniq
+    research_items.map{|item| item.data[option]}.uniq.sort
   end
 end
 

@@ -1,0 +1,14 @@
+<%= simple_nested_form_for [@software_product, @grouping, @alternative, @accomodation_wave], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+  <%= f.input :duration %>
+  <%= f.simple_fields_for :advertising_platforms, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |wf| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= wf.input :title %>
+        <%= wf.input :url %>
+        <%= wf.link_to_remove "Удалить рекламную площадку", :class => "pull-right" %>
+      </div>
+    </div>
+  <% end %>
+  <%= f.link_to_add "Добавить рекламную площадку", :advertising_platforms, :class => "btn btn-primary" %>
+  <%= f.button :submit, :class => "pull-right btn-success" %>
+<% end %>

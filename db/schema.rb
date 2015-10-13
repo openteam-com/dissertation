@@ -11,10 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006061822) do
+ActiveRecord::Schema.define(version: 20151013024654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accomodation_waves", force: :cascade do |t|
+    t.integer  "duration"
+    t.integer  "alternative_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "advertising_places", force: :cascade do |t|
+    t.integer  "views_quantity"
+    t.string   "price_type"
+    t.float    "price"
+    t.integer  "advertising_platform_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "advertising_platforms", force: :cascade do |t|
+    t.string   "title"
+    t.string   "url"
+    t.integer  "accomodation_wave_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "alternatives", force: :cascade do |t|
     t.integer  "segment_id"

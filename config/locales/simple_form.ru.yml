@@ -11,6 +11,9 @@ ru:
       software_product:
         title: 'Название программного продукта'
         research_items_csv: 'CSV файл для импорта объектов для исследования'
+      workforce_directories:
+        specialists: 'Группа специалистов'
+        available_resources: "Доступные ресурсы"
       replication_model:
         title: 'Название модели'
         fixed_costs: 'Постоянные затраты'
@@ -45,9 +48,20 @@ ru:
         parameter8: "Технологическая мобильность компании"
         parameter9: "Опыт компании по обслуживанию потребителей"
         parameter10: "Соответствие стратегическим целям и ключевой компетентности компании"
+        average_cost: "Средняя стоимость ПО"
       parameter_weight:
         <<: *alternative
-
+      accomodation_wave:
+        duration: "Продолжительность"
+      advertising_platforms: &advertising_platform
+        title: "Название площадки"
+        url: "Ссылка"
+      advertising_platform:
+        <<: *advertising_platform
+      advertising_places:
+        views_quantity: "Среднесуточное количество показов"
+        price_type: "Тип стоимости"
+        price: "Стоимость"
     hints:
       user:
         password_confirmation: 'минимум 8 символов'
@@ -60,9 +74,13 @@ ru:
         password_confirmation: 'Введите подтверждение пароля'
       software_product:
         title: 'Введите название программного продукта'
+      workforce_directories:
+        specialists: 'Группа специалистов'
+        available_resources: "Доступные ресурсы"
       replication_model:
         fixed_costs: 'Введите постоянные затраты'
         variable_costs: 'Введите переменные затраты'
+        investition_percent: 'Процент объема инвестиций'
       workforces:
         specialists: 'Трудовые ресурсы узкопрофильных специалистов'
         fixed_resources: 'Требуемые постоянные ресурсы'
@@ -71,3 +89,9 @@ ru:
         title: 'Введите название группировки'
       grouping_parameters:
         grouping_field: 'Поле для группировки'
+      accomodation_wave:
+        duration: "Продолжительность"
+      advertising_platforms:
+        <<: *advertising_platform
+      advertising_platform:
+        <<: *advertising_platform

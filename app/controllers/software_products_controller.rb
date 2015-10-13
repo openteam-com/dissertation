@@ -2,7 +2,7 @@ class SoftwareProductsController < ApplicationController
   add_breadcrumb "Список программных продуктов", :software_products_path
 
   def index
-    @software_products = SoftwareProduct.all
+    @software_products = current_user.software_products
   end
 
   def new
