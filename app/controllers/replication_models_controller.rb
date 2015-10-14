@@ -1,6 +1,8 @@
 class ReplicationModelsController < ApplicationController
   before_action :software_product, :add_breadcrumbs
 
+  layout 'software_product'
+
   def new
     add_breadcrumb "Новая модель тиражирования", new_software_product_replication_model_path(@software_product)
     @replication_model = @software_product.replication_models.new

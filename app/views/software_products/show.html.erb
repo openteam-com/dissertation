@@ -1,33 +1,110 @@
 <%= render :partial => 'commons/breadcrumbs' %>
-<div class="software-product-attribute">
-  <p class="pull-left">Название программного продукта:</p>
-  <p class="pull-left"><%= @software_product.title %></p>
-  <div class="btn-group pull-right" role="group">
-    <%= link_to edit_software_product_path(@software_product), :class =>"btn btn-warning", :title => "Редактировать" do %>
-      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-    <% end %>
-    <%= link_to software_product_path(@software_product), :class =>"btn btn-danger", :method => :delete, :title => "Удалить", :data => {:confirm => "Вы уверены?"} do %>
-      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-    <% end %>
-  </div>
-</div>
-
-<div class="software-product-attribute">
-  <div class="panel panel-primary">
-    <div class="panel-heading">Объекты исследования:</div>
-    <div class="panel-body js-panel-body">
-      <% if params[:job_id].present? %>
-        <div class="js-progress">
-          <p><%= I18n.t("progressbar.title.#{params[:pb_kind]}") %></p>
-          <div class="progress">
-            <div class="js-progressbar progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" data-jobid=<%= params[:job_id] %>></div>
-          </div>
+<% if stage == 'first' %>
+  <div class="software-product-attribute">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Исходные данные:</div>
+      <div class="panel-body">
+        <div class="data-wrapper">
+          <p class="pull-left spa-label">Название программного продукта:</p>
+          <p class="pull-left">
+            <%= @software_product.title %>
+            <%= link_to edit_software_product_path(@software_product), :title => "Редактировать" do %>
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            <% end %>
+            <%= link_to software_product_path(@software_product), :method => :delete, :title => "Удалить", :data => {:confirm => "Вы уверены?"} do %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+          </p>
         </div>
-      <% end %>
-      <%= render :partial => 'csv_info' %>
+        <div class="data-wrapper">
+          <p class="spa-label">Доступные трудовые ресурсы:</p>
+          <ul>
+            <% @software_product.workforce_directories.each do |workforce| %>
+              <li>
+                <%= workforce.specialists %>
+                <span class="spa-annotation">(доступно: <%= workforce.available_resources %>)</span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+
+  <div class="software-product-attribute">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Модели:</div>
+      <div class="panel-body">
+        <%= link_to  new_software_product_replication_model_path(@software_product), :title => "Добавить модель", :class => "btn btn-success pull-right" do %>
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          Добавить модель
+        <% end %>
+        <div class="models">
+          <% if @software_product.replication_models.present? %>
+            <% @software_product.replication_models.each do |model| %>
+              <div class="model">
+                <div class="data-wrapper">
+                  <p class="pull-left spa-label">Тип модели распрастранения:</p>
+                  <p class="pull-left">
+                    <%= model.title %>
+                    <%= link_to edit_software_product_replication_model_path(@software_product, model), :title => "Редактировать модель" do %>
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    <% end %>
+                    <%= link_to software_product_replication_model_path(@software_product, model), :title => "Удалить модель", :method => :delete, :data => {:confirm => "Вы уверены?"} do %>
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    <% end %>
+                  </p>
+                </div>
+                <div class="data-wrapper">
+                  <p class="pull-left spa-label">Постоянные затраты:</p>
+                  <p class="pull-left"><%= model.fixed_costs %> руб.</p>
+                </div>
+                <div class="data-wrapper">
+                  <p class="pull-left spa-label">Переменные затраты:</p>
+                  <p class="pull-left"><%= model.variable_costs %> руб.</p>
+                </div>
+                <div class="data-wrapper">
+                  <p class="pull-left spa-label">Процент объема инвестиций:</p>
+                  <p class="pull-left"><%= model.investition_percent %> %</p>
+                </div>
+                <div class="data-wrapper">
+                  <p class="spa-label">Трудовые ресурсы:</p>
+                  <ul>
+                    <% model.workforces.each do |workforce| %>
+                      <li>
+                        <%= workforce.specialists %>
+                        <span class="spa-annotation">(постоянные ресурсы: <%= workforce.fixed_resources %>, переменные ресурсы: <%= workforce.variable_resources %>)</span>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <h4>Не добавлено ни одной модели</h4>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<% if false %>
+  <div class="software-product-attribute">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Объекты исследования:</div>
+      <div class="panel-body js-panel-body">
+        <% if params[:job_id].present? %>
+          <div class="js-progress">
+            <p><%= I18n.t("progressbar.title.#{params[:pb_kind]}") %></p>
+            <div class="progress">
+              <div class="js-progressbar progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" data-jobid=<%= params[:job_id] %>></div>
+            </div>
+          </div>
+        <% end %>
+        <%= render :partial => 'csv_info' %>
+      </div>
+    </div>
+  </div>
 
 <div class="software-product-attribute">
   <div class="panel panel-primary">
@@ -78,39 +155,4 @@
   </div>
 </div>
 
-<div class="software-product-attribute">
-  <div class="panel panel-primary">
-    <div class="panel-heading">Модели:</div>
-    <div class="panel-body">
-      <%= link_to  new_software_product_replication_model_path(@software_product), :title => "Добавить модель", :class => "btn btn-success pull-right" do %>
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        Добавить модель
-      <% end %>
-      <div class="models">
-        <% if @software_product.replication_models.present? %>
-          <% @software_product.replication_models.each do |model| %>
-            <div class="model">
-              <p>
-                <%= model.title %>
-                <%= link_to edit_software_product_replication_model_path(@software_product, model), :title => "Редактировать модель" do %>
-                  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                <% end %>
-                <%= link_to software_product_replication_model_path(@software_product, model), :title => "Удалить модель", :method => :delete, :data => {:confirm => "Вы уверены?"} do %>
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                <% end %>
-              </p>
-              <p>Трудовые ресурсы:</p>
-              <ul>
-                <% model.workforces.each do |workforce| %>
-                  <li><%= workforce.specialists %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-        <% else %>
-          <h4>Не добавлено ни одной модели</h4>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+<% end %>

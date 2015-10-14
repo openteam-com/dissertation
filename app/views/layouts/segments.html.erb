@@ -1,5 +1,5 @@
 <% content_for :segments do %>
-  <div class="row">
+  <div class="row content-wrapper">
     <div class="col-xs-2">
       <ul class="nav nav-pills nav-stacked">
         <%= content_tag :li, :class => controller_name == 'segments' && !params[:childless] && action_name != 'edit' ? 'active' : nil  do %>
