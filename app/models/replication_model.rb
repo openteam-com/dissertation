@@ -9,7 +9,7 @@ class ReplicationModel < ActiveRecord::Base
   accepts_nested_attributes_for :workforces, :allow_destroy => true, :reject_if => :all_blank
 
   extend Enumerize
-  enumerize :title, in: [:saas, :esp, :spo, :license], predicates: true
+  enumerize :title, in: [:saas, :asp, :spo, :license], predicates: true
 end
 
 # == Schema Information

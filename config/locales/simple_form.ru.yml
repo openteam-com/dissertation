@@ -49,9 +49,9 @@ ru:
         parameter9: "Опыт компании по обслуживанию потребителей"
         parameter10: "Соответствие стратегическим целям и ключевой компетентности компании"
         average_cost: "Средняя стоимость ПО"
-        pessimistic_profit: "Пессимистический объем сегмента"
-        real_profit: "Реальный объем сегмента"
-        optimistic_profit: "Оптимистический объем сегмента"
+        pessimistic_profit: "Пессимистическое количество поставок"
+        real_profit: "Наиболее вероятное количество поставок"
+        optimistic_profit: "Оптимистическое количество поставок"
       parameter_weight:
         <<: *alternative
       accomodation_wave:

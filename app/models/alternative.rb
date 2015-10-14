@@ -28,11 +28,11 @@ class Alternative < ActiveRecord::Base
   end
 
   def profit
-    sales - fixed_costs - (profit_pert * variable_costs) - investiton
+    sales - (profit_pert * variable_costs)
   end
 
   def investiton
-    sales / 100 * investition_percent
+    profit / 100 * investition_percent
   end
 
   def sales

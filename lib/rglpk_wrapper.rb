@@ -52,7 +52,7 @@ class RglpkWrapper
     end
 
     def set_coef
-      problem.obj.coefs = alternatives.map(&:profit)
+      problem.obj.coefs = alternatives.map{ |alternative| alternative.profit - alternative.fixed_costs }
     end
 
     def set_matrix
