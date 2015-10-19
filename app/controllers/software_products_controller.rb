@@ -1,6 +1,8 @@
 class SoftwareProductsController < ApplicationController
   add_breadcrumb "Список программных продуктов", :software_products_path
 
+  layout 'software_product', :except => [:index]
+
   def index
     @software_products = current_user.software_products
   end
@@ -42,7 +44,7 @@ class SoftwareProductsController < ApplicationController
     if @software_product.update(software_product_params)
       path = "#{Rails.root}/public/#{@software_product.research_items_csv.url}".split('?').first
       job_id = ResearchItemsWorker.perform_async(path, @software_product.id)
-      redirect_to software_product_path(@software_product, :job_id => job_id, :pb_kind => "csv_upload")
+      redirect_to software_product_path(@software_product, :job_id => job_id, :pb_kind => "csv_upload", :stage => 'first')
     else
       render :show
     end
@@ -52,7 +54,7 @@ class SoftwareProductsController < ApplicationController
     @software_product = SoftwareProduct.find(params[:software_product_id])
     @software_product.update_attributes(:research_items_csv => nil)
     job_id = DestroyResearchItems.perform_async(@software_product.id)
-    redirect_to software_product_path(@software_product, :job_id => job_id, :pb_kind => "destroy_research_items")
+    redirect_to software_product_path(@software_product, :job_id => job_id, :pb_kind => "destroy_research_items", :stage =>'first')
   end
 
   private

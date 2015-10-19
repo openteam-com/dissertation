@@ -1,0 +1,26 @@
+<% content_for :software_products do %>
+  <div class="row content-wrapper">
+    <div class="col-xs-3">
+      <ul class="nav nav-pills nav-stacked">
+        <%= content_tag :li, :class => stage == 'first' ? 'active' : nil  do %>
+          <%= link_to "Исходные данные ПП", software_product_path(@software_product, :stage => "first") %>
+        <% end %>
+        <%= content_tag :li, :class => controller_name == 'segments' ? 'active' : nil  do %>
+          <%= link_to "Сегментирование потребителей", "#" %>
+        <% end %>
+        <%= content_tag :li, :class => controller_name == 'segments' ? 'active' : nil  do %>
+          <%= link_to "Выбор альтернатив поставки", "#" %>
+        <% end %>
+        <%= content_tag :li, :class => controller_name == 'segments' ? 'active' : nil  do %>
+          <%= link_to "Разработка плана размещения КС", "#" %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-9">
+      <div class="content-wrapper">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<%= render template: "layouts/application" %>
