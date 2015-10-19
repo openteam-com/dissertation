@@ -8,7 +8,6 @@
       <th>Прогнозируемая прибыль</th>
       <th>Интегральный показатель привлекательности</th>
       <th>Трудовые ресурсы</th>
-      <th>Решение</th>
     </thead>
     <tbody>
       <% @alternatives.each_with_index do |alternative, index| %>
@@ -29,7 +28,6 @@
             <%= link_to "Изменить", edit_software_product_grouping_alternative_path(@software_product, @grouping, alternative)  %>
           </td>
           <td><%= alternative.workforce_values %></td>
-          <td><%= @problem.cols[index].get_prim.round %></td>
         </tr>
       <% end %>
     </tbody>

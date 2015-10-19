@@ -65,6 +65,15 @@ ru:
         views_quantity: "Среднесуточное количество показов"
         price_type: "Тип стоимости"
         price: "Стоимость"
+      solution:
+        first_step: "Шаг 1"
+        second_step: "Шаг 2"
+        third_step: "Шаг 3"
+        fourth_step: "Шаг 4"
+        max_profit_concession: "Уступка на прибыль"
+        max_attractiveness_concession: "Уступка на привелкательность"
+        min_investition_concession: "Уступка на инвестиции"
+        min_segments_concession: "Уступка на количество сегментов"
     hints:
       user:
         password_confirmation: 'минимум 8 символов'
@@ -98,3 +107,16 @@ ru:
         <<: *advertising_platform
       advertising_platform:
         <<: *advertising_platform
+    options:
+      solution:
+        first_step: &step
+          max_profit: "Максимизация прибыли"
+          max_attractiveness: "Максимизация привлекательности"
+          min_segments: "Миниминазация количества сегментов"
+          min_investition: "Миниминазация затрат"
+        second_step:
+          <<: *step
+        third_step:
+          <<: *step
+        fourth_step:
+          <<: *step

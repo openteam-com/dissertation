@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       end
 
      get 'accomodation_waves', :on => :member
+     get 'alternatives_selection', :on => :member
     end
 
     patch 'upload_csv'

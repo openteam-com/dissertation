@@ -36,4 +36,10 @@ ru:
       destroy_research_items: "Выполняется удаление объектов исследования:"
       segments: "Выполняется подсчет сегментов"
       rebuild_segments: "Выполняется пересчет сегментов"
+  solution:
+    step_result:
+      max_profit: "Общая прибыль"
+      max_attractiveness: "Общая привлекательность"
+      min_investition: "Общие затраты"
+      min_segments: "Общее количество  сегментов"
 

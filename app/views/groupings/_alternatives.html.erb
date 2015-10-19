@@ -1,0 +1,24 @@
+<div class="table-responsive">
+  <table class="table table-condensed table-bordered">
+    <thead>
+      <th>Название</th>
+      <th>Модель распростананеия</th>
+      <th>Объем инвестиций</th>
+      <th>Прогнозируемая прибыль</th>
+      <th>Интегральный показатель привлекательности</th>
+    </thead>
+    <tbody>
+      <% alternatives.each_with_index do |alternative, index| %>
+        <%= content_tag :tr, :class => alternative.send("step#{step_number}") ? "bg-success" : nil  do %>
+          <td><%= alternative.segment_full_name %></td>
+          <td><%= alternative.replication_model_title %></td>
+          <td><%= alternative.investiton %></td>
+          <td><%= alternative.profit %></td>
+          <td><%= alternative.attractiveness.round(2) %></td>
+        <% end %>
+      <% end %>
+      <%= render :partial => 'step_result', :locals => { :step_title => step_title } %>
+    </tbody>
+  </table>
+  <p><b>Всего подходящих сегментов:</b> <%= instance_variable_get("@#{step_title}_result")["segments"] %> </p>
+</div>

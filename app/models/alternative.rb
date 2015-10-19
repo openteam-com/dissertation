@@ -41,7 +41,7 @@ class Alternative < ActiveRecord::Base
 
   def workforce_values
     workforces.inject({}){ |hash, workforce|
-      hash[workforce.specialists] = workforce.fixed_resources + profit_pert * workforce.variable_resources
+      hash[workforce.specialists] = profit_pert * workforce.variable_resources
       hash
     }
   end
@@ -76,4 +76,8 @@ end
 #  pessimistic_profit   :integer          default(0)
 #  real_profit          :integer          default(0)
 #  optimistic_profit    :integer          default(0)
+#  step1                :boolean
+#  step2                :boolean
+#  step3                :boolean
+#  step4                :boolean
 #
