@@ -56,7 +56,7 @@ class RglpkWrapper
         additional_bounds.each do |key, value|
           if key.match(/max/)
             if key == "max_profit_concession"
-              bound = value[0].to_f - value[1].to_f + alternatives.map(&:replication_model).uniq.sum()
+              bound = value[0].to_f - value[1].to_f + alternatives.map(&:replication_model).uniq.map(&:fixed_costs).sum()
             else
               bound = value[0].to_f - value[1].to_f
             end
