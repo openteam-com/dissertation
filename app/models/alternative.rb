@@ -31,7 +31,7 @@ class Alternative < ActiveRecord::Base
     sales - (profit_pert * variable_costs)
   end
 
-  def investiton
+  def investition
     profit / 100 * investition_percent
   end
 

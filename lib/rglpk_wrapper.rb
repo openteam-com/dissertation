@@ -84,7 +84,7 @@ class RglpkWrapper
       when "max_attractiveness"
         problem.obj.coefs = alternatives.map{ |alternative| alternative.attractiveness }
       when "min_investition"
-        problem.obj.coefs = alternatives.map{ |alternative| alternative.investiton }
+        problem.obj.coefs = alternatives.map{ |alternative| alternative.investition }
       when "min_segments"
         problem.obj.coefs = alternatives.map{ |alternative| 1 }
       end
@@ -100,7 +100,7 @@ class RglpkWrapper
       }
 
       additional_coef = []
-      additional_bounds.each do |key, value|
+      additional_bounds.each do |key, _|
         case key
         when "max_profit_concession"
           additional_coef << alternatives.map{ |alternative| alternative.profit }

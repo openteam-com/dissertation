@@ -16,7 +16,8 @@ queryForPercentage = () ->
       if data['percent'] != 100
         setTimeout(queryForPercentage, 500)
       else
-        window.location = window.location.pathname
+        stage = decodeURIComponent(location.search.substr(1)).split('&')
+        window.location = window.location.pathname + "?#{stage[stage.length - 1]}"
       return
 
   return

@@ -1,7 +1,8 @@
 class GroupingsController < ApplicationController
   before_action :software_product, :add_breadcrumbs
 
-  layout 'segments', :only => [:accomodation_waves, :alternatives_selection]
+  layout 'software_product'
+  #layout 'segments', :only => [:accomodation_waves, :alternatives_selection]
 
   def new
     add_breadcrumb "Новая группировка", new_software_product_grouping_path(@software_product)
@@ -10,7 +11,7 @@ class GroupingsController < ApplicationController
 
   def create
     @grouping = @software_product.groupings.create(groupings_params)
-    respond_with @grouping, :location =>  software_product_path(@software_product)
+    respond_with @grouping, :location =>  software_product_path(@software_product, :stage => stage)
   end
 
   def edit
@@ -21,12 +22,12 @@ class GroupingsController < ApplicationController
   def update
     @grouping = Grouping.find(params[:id])
     @grouping.update(groupings_params)
-    respond_with @software_product, @grouping, :location =>  software_product_path(@software_product)
+    respond_with @software_product, @grouping, :location =>  software_product_path(@software_product, :stage => stage)
   end
 
   def destroy
     Grouping.find(params[:id]).destroy
-    redirect_to software_product_path(@software_product)
+    redirect_to software_product_path(@software_product, :stage => stage)
   end
 
   def accomodation_waves
@@ -92,7 +93,7 @@ class GroupingsController < ApplicationController
 
     def add_breadcrumbs
       add_breadcrumb "Список программных продуктов", :software_products_path
-      add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product)
+      add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product, :stage => stage)
     end
 
     def solution_step?(step)
@@ -103,7 +104,7 @@ class GroupingsController < ApplicationController
       {
         "profit" => alternatives.sum(&:profit) - alternatives.map(&:fixed_costs).uniq.sum(),
         "attractiveness" => alternatives.sum(&:attractiveness),
-        "investiton" => alternatives.sum(&:investiton),
+        "investition" => alternatives.sum(&:investition),
         "segments" => alternatives.count,
         "workforces" => alternatives.map(&:workforce_values).inject(Hash.new(0)){|hash, iter| iter.each{|key,value| hash[key] += value}; hash}
       }
@@ -114,10 +115,14 @@ class GroupingsController < ApplicationController
       step_collection = step_collection[0..step_collection.index(step)]
       step_collection.inject({}){ |hash, step|
         if solution_step?(step)
-          step_value = params[:solution][:first_step]
+          step_value = params[:solution][step]
           hash["#{step_value}_concession"] = [instance_variable_get("@#{step}_result")[step_value.gsub(/max_|min_/, "")], params[:solution]["#{step_value}_concession"]]
         end
         hash
       }
+    end
+
+    def stage
+      params[:stage] || "second"
     end
 end

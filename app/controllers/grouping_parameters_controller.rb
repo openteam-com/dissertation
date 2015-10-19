@@ -1,6 +1,8 @@
 class GroupingParametersController < ApplicationController
   before_action :software_product, :grouping, :add_breadcrumbs
 
+  layout "software_product"
+
   def edit
     @grouping_parameter = GroupingParameter.find(params[:id])
     add_breadcrumb "Редактирование параметра группировки", edit_software_product_grouping_grouping_parameter_path(@software_product, @grouping, @grouping_parameter)
@@ -9,12 +11,12 @@ class GroupingParametersController < ApplicationController
   def update
     @grouping_parameter = GroupingParameter.find(params[:id])
     @grouping_parameter.update(grouping_parameter_params)
-    respond_with @software_product, @grouping, @grouping_parameter, :location =>  software_product_path(@software_product)
+    respond_with @software_product, @grouping, @grouping_parameter, :location =>  software_product_path(@software_product, :stage => stage)
   end
 
   def destroy
     GroupingParameter.find(params[:id]).destroy
-    redirect_to software_product_path(@software_product)
+    redirect_to software_product_path(@software_product, :stage => stage)
   end
 
   private
@@ -33,6 +35,10 @@ class GroupingParametersController < ApplicationController
 
     def add_breadcrumbs
       add_breadcrumb "Список программных продуктов", :software_products_path
-      add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product)
+      add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product, :stage => stage)
+    end
+
+    def stage
+      params[:stage] || "second"
     end
 end
