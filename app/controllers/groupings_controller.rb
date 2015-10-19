@@ -104,7 +104,8 @@ class GroupingsController < ApplicationController
         "profit" => alternatives.sum(&:profit) - alternatives.map(&:fixed_costs).uniq.sum(),
         "attractiveness" => alternatives.sum(&:attractiveness),
         "investiton" => alternatives.sum(&:investiton),
-        "segments" => alternatives.count
+        "segments" => alternatives.count,
+        "workforces" => alternatives.map(&:workforce_values).inject(Hash.new(0)){|hash, iter| iter.each{|key,value| hash[key] += value}; hash}
       }
     end
 

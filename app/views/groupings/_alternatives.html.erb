@@ -6,6 +6,7 @@
       <th>Объем инвестиций</th>
       <th>Прогнозируемая прибыль</th>
       <th>Интегральный показатель привлекательности</th>
+      <th>Трудовые ресурсы</th>
     </thead>
     <tbody>
       <% alternatives.each_with_index do |alternative, index| %>
@@ -15,6 +16,7 @@
           <td><%= alternative.investiton %></td>
           <td><%= alternative.profit %></td>
           <td><%= alternative.attractiveness.round(2) %></td>
+          <td><%= alternative.workforce_values %></td>
         <% end %>
       <% end %>
       <%= render :partial => 'step_result', :locals => { :step_title => step_title } %>

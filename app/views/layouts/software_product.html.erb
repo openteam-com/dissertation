@@ -5,8 +5,8 @@
         <%= content_tag :li, :class => stage == 'first' ? 'active' : nil  do %>
           <%= link_to "Исходные данные ПП", software_product_path(@software_product, :stage => "first") %>
         <% end %>
-        <%= content_tag :li, :class => controller_name == 'segments' ? 'active' : nil  do %>
-          <%= link_to "Сегментирование потребителей", "#" %>
+        <%= content_tag :li, :class => stage == 'second' ? 'active' : nil  do %>
+          <%= link_to "Сегментирование потребителей", software_product_path(@software_product, :stage => "second") %>
         <% end %>
         <%= content_tag :li, :class => controller_name == 'segments' ? 'active' : nil  do %>
           <%= link_to "Выбор альтернатив поставки", "#" %>

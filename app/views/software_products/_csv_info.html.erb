@@ -2,7 +2,7 @@
   <% if @software_product.research_items.present? %>
     <%= render :partial => 'commons/research_items_table', :locals => { :collection => @software_product.limited_research_items } %>
     <div class="btn-group pull-right" role="group">
-      <%= link_to "Посмотреть все значения", software_product_research_items_path(@software_product), :class => "btn btn-default" %>
+      <%= link_to "Посмотреть все значения", software_product_research_items_path(@software_product, :stage => stage), :class => "btn btn-default" %>
       <%= link_to "Удалить все значения", software_product_destroy_research_items_path(@software_product), :method => :delete, :class => "btn btn-danger", :data => {:confirm => "Вы уверены?"} %>
     </div>
   <% else %>
