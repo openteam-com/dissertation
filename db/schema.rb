@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014031339) do
+ActiveRecord::Schema.define(version: 20151014102051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,10 @@ ActiveRecord::Schema.define(version: 20151014031339) do
     t.integer  "pessimistic_profit",   default: 0
     t.integer  "real_profit",          default: 0
     t.integer  "optimistic_profit",    default: 0
+    t.boolean  "step1"
+    t.boolean  "step2"
+    t.boolean  "step3"
+    t.boolean  "step4"
   end
 
   create_table "grouping_parameters", force: :cascade do |t|

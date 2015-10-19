@@ -1,0 +1,28 @@
+<%= simple_form_for :solution, :url => alternatives_selection_software_product_grouping_path(@software_product, @grouping ),
+                               :method => :get, :html => { class: 'form-horizontal' }, :wrapper => :horizontal_form do |f| %>
+  <%= f.input :first_step, :as => :select, :collection => maximization, :selected => step_value("first_step") %>
+
+  <% if step_visibility?("first_step") %>
+    <%= render :partial => 'alternatives', :locals => { :alternatives => @first_step_alternatives, :step_number => 1, :step_title => "first_step" } %>
+    <%= f.input "#{step_value('first_step')}_concession", :as => :float, :input_html => { :value => concession_value("first_step") } %>
+    <%= f.input :second_step, :as => :select, :collection => solution_step_collection("first_step"), :selected => step_value("second_step") %>
+  <% end %>
+
+  <% if step_visibility?("second_step") %>
+    <%= render :partial => 'alternatives', :locals => { :alternatives => @second_step_alternatives, :step_number => 2, :step_title => "second_step" } %>
+    <%= f.input "#{step_value('second_step')}_concession", :as => :float, :input_html => { :value => concession_value("second_step") } %>
+    <%= f.input :third_step, :as => :select, :collection => solution_step_collection("second_step"), :selected => step_value("third_step") %>
+  <% end %>
+
+  <% if step_visibility?("third_step") %>
+    <%= render :partial => 'alternatives', :locals => { :alternatives => @third_step_alternatives, :step_number => 3, :step_title => "third_step" } %>
+    <%= f.input "#{step_value('third_step')}_concession", :as => :float, :input_html => { :value => concession_value("third_step") } %>
+    <%= f.input :fourth_step, :as => :select, :collection => solution_step_collection("third_step"), :selected => step_value("fourth_step") %>
+  <% end %>
+
+  <% if step_visibility?("fourth_step") %>
+    <%= render :partial => 'alternatives', :locals => { :alternatives => @fourth_step_alternatives, :step_number => 4, :step_title => "fourth_step" } %>
+  <% end %>
+
+  <%= f.button :submit, "Решить", :class => "pull-right" %>
+<% end %>
