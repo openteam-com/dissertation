@@ -43,7 +43,8 @@ class RglpkWrapper
     def set_row_bounds
       workforces.each_with_index do |workforce, index|
         rows[index].name = "restriction#{index}"
-        rows[index].set_bounds(Rglpk::GLP_UP, 0, workforce.available_resources - alternatives.flat_map(&:workforces).map(&:fixed_resources).uniq.sum)
+        workforce_fixed_resource = alternatives.flat_map(&:workforces).select{ |wf| wf.specialists == workforce.specialists}.uniq.map(&:fixed_resources).sum
+        rows[index].set_bounds(Rglpk::GLP_UP, 0, workforce.available_resources - workforce_fixed_resource)
       end
       (workforces.count..(rows.count-1-(step_number-1))).each do |index|
         rows[index].name = "restriction#{index}"
@@ -55,7 +56,7 @@ class RglpkWrapper
         additional_bounds.each do |key, value|
           if key.match(/max/)
             if key == "max_profit_concession"
-              bound = value[0].to_f - value[1].to_f + alternatives.map(&:fixed_costs).uniq.sum()
+              bound = value[0].to_f - value[1].to_f + alternatives.map(&:replication_model).uniq.sum()
             else
               bound = value[0].to_f - value[1].to_f
             end
