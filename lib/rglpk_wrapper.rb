@@ -19,10 +19,10 @@ class RglpkWrapper
     set_col_bounds
     set_coef
     set_matrix
-    problem.simplex
+    problem.mip({:presolve => Rglpk::GLP_ON})
 
     alternatives.each_with_index do |alternative, index|
-      alternative.update_column("step#{step_number}", !(problem.cols[index].get_prim.round.zero?))
+      alternative.update_column("step#{step_number}", !(problem.cols[index].mip_val.zero?))
     end
   end
 
@@ -73,6 +73,7 @@ class RglpkWrapper
     def set_col_bounds
       (0..(cols.count-1)).each do |index|
         cols[index].name = "x#{index}"
+        cols[index].set_bounds(Rglpk::GLP_LO, 0.0, 0.0)
         cols[index].kind = Rglpk::GLP_BV
       end
     end
