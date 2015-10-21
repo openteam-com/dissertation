@@ -71,7 +71,7 @@ ru:
         third_step: "Шаг 3"
         fourth_step: "Шаг 4"
         max_profit_concession: "Уступка на прибыль"
-        max_attractiveness_concession: "Уступка на привелкательность"
+        max_attractiveness_concession: "Уступка на привлекательность"
         min_investition_concession: "Уступка на инвестиции"
         min_segments_concession: "Уступка на количество сегментов"
     hints:

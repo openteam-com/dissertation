@@ -3,7 +3,7 @@
     <ul>
       <% @segments.childless.sort_by(&:full_name).each do |segment| %>
         <li>
-          <%= link_to software_product_research_items_path(@software_product, :segment_id => segment.id) do %>
+          <%= link_to software_product_research_items_path(@software_product, :segment_id => segment.id, :stage => "third") do %>
             <%= segment.full_name %>
             <span class="badge"><%= segment.research_items.count %></span>
           <% end %>
@@ -15,7 +15,7 @@
     <ul>
       <% @segments.roots.sort_by(&:full_name).each do |segment| %>
         <li>
-          <%= link_to software_product_research_items_path(@software_product, :segment_id => segment.id) do %>
+          <%= link_to software_product_research_items_path(@software_product, :segment_id => segment.id, :stage => "third") do %>
             <%= segment.title %>
             <span class="badge"><%= segment.research_items.count %></span>
           <% end %>
@@ -23,6 +23,6 @@
         <%= render :partial => 'segment_children', :locals => {segment: segment} if segment.has_children? %>
       <% end %>
     </ul>
-    <%= link_to "Пересчитать сегменты", rebuild_segments_software_product_grouping_segments_path(@software_product, @grouping), :class => "btn btn-primary pull-right" %>
+    <%= link_to "Пересчитать сегменты", rebuild_segments_software_product_grouping_segments_path(@software_product, @grouping, stage => "third"), :class => "btn btn-primary pull-right" %>
   <% end %>
 </div>

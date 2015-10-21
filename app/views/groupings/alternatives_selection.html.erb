@@ -1,4 +1,5 @@
-<%= simple_form_for :solution, :url => alternatives_selection_software_product_grouping_path(@software_product, @grouping ),
+<%= render :partial => 'commons/breadcrumbs' %>
+<%= simple_form_for :solution, :url => alternatives_selection_software_product_grouping_path(@software_product, @grouping),
                                :method => :get, :html => { class: 'form-horizontal' }, :wrapper => :horizontal_form do |f| %>
   <%= f.input :first_step, :as => :select, :collection => maximization, :selected => step_value("first_step") %>
 

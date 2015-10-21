@@ -24,8 +24,4 @@ module ApplicationHelper
   def concession_value(step)
     params[:solution].try(:[], "#{step_value(step)}_concession") || 0
   end
-
-  def stage
-    params[:stage] || 'first'
-  end
 end

@@ -1,4 +1,5 @@
 class GroupingParametersController < ApplicationController
+  helper_method :stage
   before_action :software_product, :grouping, :add_breadcrumbs
 
   layout "software_product"

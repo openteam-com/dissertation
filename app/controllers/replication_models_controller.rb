@@ -1,4 +1,5 @@
 class ReplicationModelsController < ApplicationController
+  helper_method :stage
   before_action :software_product, :add_breadcrumbs
 
   layout 'software_product'
@@ -42,5 +43,9 @@ class ReplicationModelsController < ApplicationController
     def add_breadcrumbs
       add_breadcrumb "Список программных продуктов", :software_products_path
       add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product)
+    end
+
+    def stage
+      params[:stage] || "first"
     end
 end

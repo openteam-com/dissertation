@@ -1,12 +1,12 @@
 class GroupingsController < ApplicationController
+  helper_method :stage
   before_action :software_product, :add_breadcrumbs
 
   layout 'software_product'
-  #layout 'segments', :only => [:accomodation_waves, :alternatives_selection]
 
   def new
     add_breadcrumb "Новая группировка", new_software_product_grouping_path(@software_product)
-    @grouping = @software_product.groupings.new
+    @grouping = Grouping.new
   end
 
   def create
@@ -31,13 +31,20 @@ class GroupingsController < ApplicationController
   end
 
   def accomodation_waves
+    params[:stage] = "fourth"
     @grouping = Grouping.find(params[:id])
     @problem = RglpkWrapper.new(@grouping.segments.joins(:alternatives).uniq, @software_product.workforce_directories, "max_profit", 1).solve
     @alternatives = Alternative.where(:step1 => true)
+    add_breadcrumb "Группировка #{@grouping.title}", software_product_path(@software_product, :stage => "second")
+    add_breadcrumb "Волны размещения"
   end
 
   def alternatives_selection
+    params[:stage] = "third"
     @grouping = Grouping.find(params[:id])
+    add_breadcrumb "Группировка #{@grouping.title}", software_product_path(@software_product, :stage => "second")
+    add_breadcrumb "Выбор альтернатив"
+
     if solution_step?(:first_step)
       problem = RglpkWrapper.new(@grouping.segments.joins(:alternatives).uniq,
                                  @software_product.workforce_directories,
@@ -93,7 +100,7 @@ class GroupingsController < ApplicationController
 
     def add_breadcrumbs
       add_breadcrumb "Список программных продуктов", :software_products_path
-      add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product, :stage => stage)
+      add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product, :stage => "first")
     end
 
     def solution_step?(step)

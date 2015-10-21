@@ -1,3 +1,4 @@
+<%= render :partial => 'commons/breadcrumbs' %>
 <%= simple_nested_form_for [@software_product, @grouping, @alternative, @accomodation_wave], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
   <%= f.input :duration %>
   <%= f.simple_fields_for :advertising_platforms, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |wf| %>

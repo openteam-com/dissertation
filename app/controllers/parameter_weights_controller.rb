@@ -1,15 +1,17 @@
 class ParameterWeightsController < ApplicationController
-  before_action :software_product, :grouping
+  helper_method :stage
+  before_action :software_product, :grouping, :add_breadcrumbs
 
-  layout 'segments'
+  layout 'software_product'
 
   def show
     @parameter_weight = ParameterWeight.find(params[:id])
-    add_breadcrumb "Веса параметров", software_product_grouping_parameter_weight_path(@software_product, @grouping, @parameter_weight)
+    add_breadcrumb "Веса параметров"
   end
 
   def edit
     @parameter_weight = ParameterWeight.find(params[:id])
+    add_breadcrumb "Редактировать веса параметров"
   end
 
   def update
@@ -19,6 +21,12 @@ class ParameterWeightsController < ApplicationController
   end
 
   private
+    def add_breadcrumbs
+      add_breadcrumb "Список программных продуктов", :software_products_path
+      add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product, :stage => "first")
+      add_breadcrumb "Группировка '#{@grouping.title}'", software_product_path(@software_product, :stage => "second")
+    end
+
     def software_product
       @software_product ||= SoftwareProduct.find(params[:software_product_id])
     end
@@ -33,5 +41,9 @@ class ParameterWeightsController < ApplicationController
         array
       }
       params.require(:parameter_weight).permit(parameters_array)
+    end
+
+    def stage
+      params[:stage] || "third"
     end
 end

@@ -1,5 +1,7 @@
 class ResearchItemsController < ApplicationController
+  helper_method :stage
   layout "software_product"
+
   def index
     @software_product = SoftwareProduct.find(params[:software_product_id])
     research_items = research_items_collection
@@ -23,5 +25,9 @@ class ResearchItemsController < ApplicationController
 
     def segment
       @segment ||= Segment.find(params[:segment_id])
+    end
+
+    def stage
+      params[:stage]
     end
 end

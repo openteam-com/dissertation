@@ -1,3 +1,4 @@
+<%= render :partial => 'commons/breadcrumbs' %>
 <p><b>Название альтернативы:    </b><%= @alternative.segment_full_name %><span class="badge"><%= @alternative.segment.research_items.count %></span></p>
 <%= simple_form_for [@software_product, @grouping, @alternative] do |f| %>
   <% if params[:profit]  %>

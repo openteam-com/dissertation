@@ -1,4 +1,5 @@
 class SoftwareProductsController < ApplicationController
+  helper_method :stage
   add_breadcrumb "Список программных продуктов", :software_products_path
 
   layout 'software_product', :except => [:index]
@@ -44,7 +45,7 @@ class SoftwareProductsController < ApplicationController
     if @software_product.update(software_product_params)
       path = "#{Rails.root}/public/#{@software_product.research_items_csv.url}".split('?').first
       job_id = ResearchItemsWorker.perform_async(path, @software_product.id)
-      redirect_to software_product_path(@software_product, :job_id => job_id, :pb_kind => "csv_upload", :stage => 'second')
+      redirect_to software_product_path(@software_product, :job_id => job_id, :pb_kind => "csv_upload", :stage => "second")
     else
       render :show
     end
@@ -54,12 +55,16 @@ class SoftwareProductsController < ApplicationController
     @software_product = SoftwareProduct.find(params[:software_product_id])
     @software_product.update_attributes(:research_items_csv => nil)
     job_id = DestroyResearchItems.perform_async(@software_product.id)
-    redirect_to software_product_path(@software_product, :job_id => job_id, :pb_kind => "destroy_research_items", :stage =>'second')
+    redirect_to software_product_path(@software_product, :job_id => job_id, :pb_kind => "destroy_research_items", :stage => "second")
   end
 
   private
     def software_product_params
       params.require(:software_product).permit(:title, :user_id, :research_items_csv,
                                               :workforce_directories_attributes => [:id, :specialists, :available_resources, :_destroy])
+    end
+
+    def stage
+      params[:stage] || "first"
     end
 end
