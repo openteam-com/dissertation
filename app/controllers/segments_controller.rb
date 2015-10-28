@@ -4,6 +4,16 @@ class SegmentsController < ApplicationController
 
   layout 'software_product'
 
+  def new
+    @segment = Segment.new
+    add_breadcrumb "Новый сегмент"
+  end
+
+  def create
+    @segment = @grouping.segments.create(segment_params)
+    respond_with @segment, :location =>  software_product_grouping_segments_path(@software_product, @grouping, :stage => stage)
+  end
+
   def index
     if (@grouping.segments.present? && !params[:job_id]) || !@grouping.grouping_parameters?
       @segments = @grouping.segments
@@ -24,7 +34,7 @@ class SegmentsController < ApplicationController
 
   def update
     @segment = Segment.find(params[:id])
-    @segment.update(groupings_params)
+    @segment.update(segment_params)
     respond_with @software_product, @grouping, @segment, :location =>  software_product_grouping_segments_path(@software_product, @grouping, :childless => true, :stage => stage)
   end
 
@@ -49,8 +59,8 @@ class SegmentsController < ApplicationController
       @grouping ||=Grouping.find(params[:grouping_id])
     end
 
-    def groupings_params
-      params.require(:segment).permit(:replication_model_ids => [])
+    def segment_params
+      params.require(:segment).permit(:title, :replication_model_ids => [])
     end
 
     def stage

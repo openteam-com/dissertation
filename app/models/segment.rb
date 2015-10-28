@@ -6,6 +6,8 @@ class Segment < ActiveRecord::Base
   belongs_to :grouping
   belongs_to :grouping_value,           :polymorphic => true
 
+  validates_presence_of :title
+
   has_ancestry
 
   after_create :associate_research_items
@@ -21,8 +23,10 @@ class Segment < ActiveRecord::Base
   private
 
   def associate_research_items
-    (parent || grouping_value.grouping_parameter.grouping.software_product).research_items.each do |item|
-      send("#{grouping_value.prefix}_item", item)
+    if grouping_value
+      (parent || grouping_value.grouping_parameter.grouping.software_product).research_items.each do |item|
+        send("#{grouping_value.prefix}_item", item)
+      end
     end
   end
 

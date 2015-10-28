@@ -1,3 +1,4 @@
+<%= render :partial => 'commons/breadcrumbs' %>
 <% if params[:job_id] %>
   <div class="js-progress">
     <p><%= I18n.t("progressbar.title.#{params[:pb_kind]}") %></p>
@@ -7,6 +8,13 @@
   </div>
   <div class="js-panel-body"></div>
 <% else %>
-  <%= render :partial => 'commons/breadcrumbs' %>
-  <%= render :partial => 'segments' %>
+  <%= link_to new_software_product_grouping_segment_path(@software_product, @grouping), :class=> "btn btn-success pull-right" do %>
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    Добавить сегмент
+  <% end %>
+  <% if @grouping.segments.present? %>
+    <%= render :partial => 'segments' %>
+  <% else %>
+    <p>Не добавлен ни один сегмент</p>
+  <% end %>
 <% end %>

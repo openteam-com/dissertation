@@ -1,0 +1,5 @@
+<%= render partial: 'commons/breadcrumbs' %>
+<%= simple_form_for [@software_product, @grouping, @segment], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+  <%= f.input :title %>
+  <%= f.button :submit, :class => "pull-right btn-success" %>
+<% end %>

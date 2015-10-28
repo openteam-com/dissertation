@@ -29,6 +29,7 @@ ru:
         grouping_field: 'Поле для группировки'
         kind: 'Тип параметра групировки'
       segment:
+        title: "Название"
         replication_models: 'Варианты поставки'
       quality_grouping_values:
         title: 'Название'
@@ -100,6 +101,8 @@ ru:
         duration: "Продолжительность"
         budget: "Бюджет"
         click_quantity: "Минимальное количество действий"
+      segment:
+        title: "Название"
     options:
       solution:
         first_step: &step
