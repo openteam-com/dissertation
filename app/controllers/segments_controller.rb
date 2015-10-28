@@ -5,7 +5,7 @@ class SegmentsController < ApplicationController
   layout 'software_product'
 
   def index
-    if @grouping.segments.present? && !params[:job_id]
+    if (@grouping.segments.present? && !params[:job_id]) || !@grouping.grouping_parameters?
       @segments = @grouping.segments
       add_breadcrumb "Список сегментов"
     elsif params[:job_id]

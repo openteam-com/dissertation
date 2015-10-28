@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014102051) do
+ActiveRecord::Schema.define(version: 20151026090609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,50 +19,57 @@ ActiveRecord::Schema.define(version: 20151014102051) do
   create_table "accomodation_waves", force: :cascade do |t|
     t.integer  "duration"
     t.integer  "alternative_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "budget"
+    t.text     "advertising_tools"
   end
 
-  create_table "advertising_places", force: :cascade do |t|
-    t.integer  "views_quantity"
-    t.string   "price_type"
-    t.float    "price"
-    t.integer  "advertising_platform_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
-  create_table "advertising_platforms", force: :cascade do |t|
-    t.string   "title"
-    t.string   "url"
-    t.integer  "accomodation_wave_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+  create_table "advertising_tools", force: :cascade do |t|
+    t.string   "platform_title"
+    t.string   "tool_title"
+    t.string   "showing_place"
+    t.string   "price_model"
+    t.float    "period_cost"
+    t.integer  "period"
+    t.integer  "max_interval"
+    t.float    "average_show"
+    t.float    "ctr"
+    t.float    "click_cost"
+    t.integer  "period_quantity", default: 0
+    t.integer  "result",          default: 0
+    t.integer  "alternative_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "alternatives", force: :cascade do |t|
     t.integer  "segment_id"
     t.integer  "replication_model_id"
-    t.text     "parameter1",           default: "---\n- 0\n- 0\n- 0\n"
-    t.text     "parameter2",           default: "---\n- 0\n- 0\n- 0\n"
-    t.text     "parameter3",           default: "---\n- 0\n- 0\n- 0\n"
-    t.text     "parameter4",           default: "---\n- 0\n- 0\n- 0\n"
-    t.text     "parameter5",           default: "---\n- 0\n- 0\n- 0\n"
-    t.text     "parameter6",           default: "---\n- 0\n- 0\n- 0\n"
-    t.text     "parameter7",           default: "---\n- 0\n- 0\n- 0\n"
-    t.text     "parameter8",           default: "---\n- 0\n- 0\n- 0\n"
-    t.text     "parameter9",           default: "---\n- 0\n- 0\n- 0\n"
-    t.text     "parameter10",          default: "---\n- 0\n- 0\n- 0\n"
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
-    t.float    "average_cost",         default: 0.0
-    t.integer  "pessimistic_profit",   default: 0
-    t.integer  "real_profit",          default: 0
-    t.integer  "optimistic_profit",    default: 0
+    t.text     "parameter1",                        default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter2",                        default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter3",                        default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter4",                        default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter5",                        default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter6",                        default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter7",                        default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter8",                        default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter9",                        default: "---\n- 0\n- 0\n- 0\n"
+    t.text     "parameter10",                       default: "---\n- 0\n- 0\n- 0\n"
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
+    t.float    "average_cost",                      default: 0.0
+    t.integer  "pessimistic_profit",                default: 0
+    t.integer  "real_profit",                       default: 0
+    t.integer  "optimistic_profit",                 default: 0
     t.boolean  "step1"
     t.boolean  "step2"
     t.boolean  "step3"
     t.boolean  "step4"
+    t.string   "advertising_tool_csv_file_name"
+    t.string   "advertising_tool_csv_content_type"
+    t.integer  "advertising_tool_csv_file_size"
+    t.datetime "advertising_tool_csv_updated_at"
   end
 
   create_table "grouping_parameters", force: :cascade do |t|

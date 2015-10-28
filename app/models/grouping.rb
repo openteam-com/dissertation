@@ -19,6 +19,10 @@ class Grouping < ActiveRecord::Base
     segments.flat_map(&:alternatives)
   end
 
+  def grouping_parameters?
+    grouping_parameters.present?
+  end
+
   private
   def multiply_array(arr, quantity)
     arr.take(quantity).inject(:*)

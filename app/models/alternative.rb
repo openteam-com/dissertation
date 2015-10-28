@@ -3,6 +3,10 @@ class Alternative < ActiveRecord::Base
   belongs_to :replication_model
 
   has_many :accomodation_waves, :class_name => "AccomodationWave", :dependent => :destroy
+  has_many :advertising_tools ,                                    :dependent => :destroy
+
+  has_attached_file :advertising_tool_csv
+  validates_attachment_content_type :advertising_tool_csv, :content_type => /.*csv\Z/
 
   delegate :full_name, :to => :segment, :prefix => true
   delegate :title, :to => :replication_model, :prefix => true
@@ -46,6 +50,10 @@ class Alternative < ActiveRecord::Base
     }
   end
 
+  def grouped_advertising_tools
+    advertising_tools.group_by(&:tool_title)
+  end
+
   private
 
   def profit_pert
@@ -57,27 +65,31 @@ end
 #
 # Table name: alternatives
 #
-#  id                   :integer          not null, primary key
-#  segment_id           :integer
-#  replication_model_id :integer
-#  parameter1           :text             default([0, 0, 0])
-#  parameter2           :text             default([0, 0, 0])
-#  parameter3           :text             default([0, 0, 0])
-#  parameter4           :text             default([0, 0, 0])
-#  parameter5           :text             default([0, 0, 0])
-#  parameter6           :text             default([0, 0, 0])
-#  parameter7           :text             default([0, 0, 0])
-#  parameter8           :text             default([0, 0, 0])
-#  parameter9           :text             default([0, 0, 0])
-#  parameter10          :text             default([0, 0, 0])
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  average_cost         :float            default(0.0)
-#  pessimistic_profit   :integer          default(0)
-#  real_profit          :integer          default(0)
-#  optimistic_profit    :integer          default(0)
-#  step1                :boolean
-#  step2                :boolean
-#  step3                :boolean
-#  step4                :boolean
+#  id                                :integer          not null, primary key
+#  segment_id                        :integer
+#  replication_model_id              :integer
+#  parameter1                        :text             default([0, 0, 0])
+#  parameter2                        :text             default([0, 0, 0])
+#  parameter3                        :text             default([0, 0, 0])
+#  parameter4                        :text             default([0, 0, 0])
+#  parameter5                        :text             default([0, 0, 0])
+#  parameter6                        :text             default([0, 0, 0])
+#  parameter7                        :text             default([0, 0, 0])
+#  parameter8                        :text             default([0, 0, 0])
+#  parameter9                        :text             default([0, 0, 0])
+#  parameter10                       :text             default([0, 0, 0])
+#  created_at                        :datetime         not null
+#  updated_at                        :datetime         not null
+#  average_cost                      :float            default(0.0)
+#  pessimistic_profit                :integer          default(0)
+#  real_profit                       :integer          default(0)
+#  optimistic_profit                 :integer          default(0)
+#  step1                             :boolean
+#  step2                             :boolean
+#  step3                             :boolean
+#  step4                             :boolean
+#  advertising_tool_csv_file_name    :string
+#  advertising_tool_csv_content_type :string
+#  advertising_tool_csv_file_size    :integer
+#  advertising_tool_csv_updated_at   :datetime
 #

@@ -11,7 +11,13 @@ class AccomodationWavesController < ApplicationController
 
   def create
     @accomodation_wave = @alternative.accomodation_waves.create(accomodation_wave_params)
-    respond_with @accomodation_wave, :location =>  accomodation_waves_software_product_grouping_path(@software_product, @grouping, :stage => stage)
+    respond_with @accomodation_wave, :location => software_product_grouping_alternative_path(@software_product, @grouping, @alternative, :stage => "fourth")
+  end
+
+  def show
+    @results = @alternative.advertising_tools.where("result > ?", 0)
+    add_breadcrumb "Список оптимальных инструментов"
+    ToolsRglpkWrapper.new(alternative, AccomodationWave.find(params[:id])).solve
   end
 
   def edit
@@ -22,12 +28,12 @@ class AccomodationWavesController < ApplicationController
   def update
     @accomodation_wave = AccomodationWave.find(params[:id])
     @accomodation_wave.update(accomodation_wave_params)
-    respond_with @software_product, @grouping, @alternative, @accomodation_wave, :location =>  accomodation_waves_software_product_grouping_path(@software_product, @grouping, :stage => stage)
+    respond_with @software_product, @grouping, @alternative, @accomodation_wave, :location => software_product_grouping_alternative_path(@software_product, @grouping, @alternative, :stage => "fourth")
   end
 
   def destroy
     AccomodationWave.find(params[:id]).destroy
-    redirect_to accomodation_waves_software_product_grouping_path(@software_product, @grouping, :stage => "fourth")
+    redirect_to software_product_grouping_alternative_path(@software_product, @grouping, @alternative, :stage => "fourth")
   end
 
   private
@@ -35,7 +41,8 @@ class AccomodationWavesController < ApplicationController
       add_breadcrumb "Список программных продуктов", :software_products_path
       add_breadcrumb "Программный продукт '#{@software_product.title}'", software_product_path(@software_product, :stage => "first")
       add_breadcrumb "Группировка '#{@grouping.title}'", software_product_path(@software_product, :stage => "second")
-      add_breadcrumb "Волны размещения", accomodation_waves_software_product_grouping_path(@software_product, @grouping, stage => "fourth")
+      add_breadcrumb "Список альтернатив", selected_alternatives_software_product_grouping_path(@software_product, @grouping, stage => "fourth")
+      add_breadcrumb "Альтернатива #{@alternative.segment_full_name}", software_product_grouping_alternative_path(@software_product, @grouping, @alternative, :stage => "fourth")
     end
 
     def software_product
@@ -51,7 +58,7 @@ class AccomodationWavesController < ApplicationController
     end
 
     def accomodation_wave_params
-      params.require(:accomodation_wave).permit(:duration, :advertising_platforms_attributes => [:id, :title, :url, :_destroy])
+      params.require(:accomodation_wave).permit(:duration, :budget, :advertising_tools => [])
     end
 
     def stage

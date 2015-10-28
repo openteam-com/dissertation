@@ -52,19 +52,14 @@ ru:
         pessimistic_profit: "Пессимистическое количество поставок"
         real_profit: "Наиболее вероятное количество поставок"
         optimistic_profit: "Оптимистическое количество поставок"
+        advertising_tool_csv: "Список рекламных инструментов"
       parameter_weight:
         <<: *alternative
       accomodation_wave:
         duration: "Продолжительность"
-      advertising_platforms: &advertising_platform
-        title: "Название площадки"
-        url: "Ссылка"
-      advertising_platform:
-        <<: *advertising_platform
-      advertising_places:
-        views_quantity: "Среднесуточное количество показов"
-        price_type: "Тип стоимости"
-        price: "Стоимость"
+        budget: "Бюджет"
+        click_quantity: "Минимальное количество действий"
+        advertising_tools: "Рекламные инструменты"
       solution:
         first_step: "Шаг 1"
         second_step: "Шаг 2"
@@ -103,10 +98,8 @@ ru:
         grouping_field: 'Поле для группировки'
       accomodation_wave:
         duration: "Продолжительность"
-      advertising_platforms:
-        <<: *advertising_platform
-      advertising_platform:
-        <<: *advertising_platform
+        budget: "Бюджет"
+        click_quantity: "Минимальное количество действий"
     options:
       solution:
         first_step: &step

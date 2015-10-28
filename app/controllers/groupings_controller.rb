@@ -30,13 +30,12 @@ class GroupingsController < ApplicationController
     redirect_to software_product_path(@software_product, :stage => stage)
   end
 
-  def accomodation_waves
+  def selected_alternatives
     params[:stage] = "fourth"
     @grouping = Grouping.find(params[:id])
-    @problem = RglpkWrapper.new(@grouping.segments.joins(:alternatives).uniq, @software_product.workforce_directories, "max_profit", 1).solve
-    @alternatives = Alternative.where(:step1 => true)
+    @alternatives = @grouping.alternatives.select{|alternative| alternative.step4 == true }.sort_by(&:segment_full_name)
     add_breadcrumb "Группировка #{@grouping.title}", software_product_path(@software_product, :stage => "second")
-    add_breadcrumb "Волны размещения"
+    add_breadcrumb "Список альтернатив"
   end
 
   def alternatives_selection
@@ -51,7 +50,7 @@ class GroupingsController < ApplicationController
                                  params[:solution][:first_step],
                                  1).solve
 
-      @first_step_alternatives = @grouping.segments.flat_map(&:alternatives).sort_by(&:segment_full_name)
+      @first_step_alternatives = @grouping.segments.flat_map(&:alternatives).sort_by{ |alternative| [alternative.segment_full_name, alternative.replication_model_title] }
       @first_step_result = step_result(@first_step_alternatives.select{ |alternative| alternative.step1 == true })
     end
 
@@ -62,7 +61,7 @@ class GroupingsController < ApplicationController
                                  2,
                                  additional_bounds_collection("first_step")).solve
 
-      @second_step_alternatives = @grouping.segments.flat_map(&:alternatives).sort_by(&:segment_full_name)
+      @second_step_alternatives = @grouping.segments.flat_map(&:alternatives).sort_by{ |alternative| [alternative.segment_full_name, alternative.replication_model_title] }
       @second_step_result = step_result(@second_step_alternatives.select{ |alternative| alternative.step2 == true })
     end
 
@@ -73,7 +72,7 @@ class GroupingsController < ApplicationController
                                  3,
                                  additional_bounds_collection("second_step")).solve
 
-      @third_step_alternatives = @grouping.segments.flat_map(&:alternatives).sort_by(&:segment_full_name)
+      @third_step_alternatives = @grouping.segments.flat_map(&:alternatives).sort_by{ |alternative| [alternative.segment_full_name, alternative.replication_model_title] }
       @third_step_result = step_result(@third_step_alternatives.select{ |alternative| alternative.step3 == true })
     end
 
@@ -84,7 +83,7 @@ class GroupingsController < ApplicationController
                                  4,
                                  additional_bounds_collection("third_step")).solve
 
-      @fourth_step_alternatives = @grouping.segments.flat_map(&:alternatives).sort_by(&:segment_full_name)
+      @fourth_step_alternatives = @grouping.segments.flat_map(&:alternatives).sort_by{ |alternative| [alternative.segment_full_name, alternative.replication_model_title] }
       @fourth_step_result = step_result(@fourth_step_alternatives.select{ |alternative| alternative.step4 == true })
     end
   end

@@ -1,0 +1,38 @@
+<%= render :partial => 'commons/breadcrumbs' %>
+<div class="table-responsive">
+  <table class="table table-condensed table-bordered">
+    <thead>
+      <th>Площадка</th>
+      <th>Инструмент</th>
+      <th>Место показа КС</th>
+      <th>Ценовая модель</th>
+      <th>Стоимость размещения за период, рублей</th>
+      <th>Допустимый период показов</th>
+      <th>Максимальная продолжительность показов в единицах интервала планирования</th>
+      <th>Среднее количество показов за допустимый период</th>
+      <th>Прогнозный показатель качества</th>
+      <th>Стоимость клика, руб.</th>
+      <th>Результат</th>
+    </thead>
+    <tbody>
+      <% @alternative.advertising_tools.order(:platform_title).order(:showing_place).order(:tool_title).each do |tool|  %>
+        <tr class="<%= tool.result > 0 ? "bg-success" : nil %>">
+          <td><%= tool.platform_title %></td>
+          <td><%= tool.tool_title %></td>
+          <td><%= tool.showing_place %></td>
+          <td><%= tool.price_model %></td>
+          <td><%= tool.period_cost %></td>
+          <td><%= tool.period %></td>
+          <td><%= tool.max_interval %></td>
+          <td><%= tool.average_show %></td>
+          <td><%= tool.ctr %></td>
+          <td><%= tool.click_cost %></td>
+          <td class="result"><%= tool.result %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<p><strong>Общая стоимость:</strong> <%= @results.inject(0){ |sum, tool| sum + tool.result * tool.period_cost}.round(2) %></p>
+<p><strong>Общее количество показов:</strong> <%= @results.inject(0){ |sum, tool| sum + tool.result * tool.average_show}.round(2) %></p>
+<p><strong>Общее количество кликов:</strong> <%= @results.inject(0){ |sum, tool| sum + tool.result * tool.average_show * tool.ctr/100}.round(2) %></p>

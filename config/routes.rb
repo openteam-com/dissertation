@@ -10,23 +10,22 @@ Rails.application.routes.draw do
     resources :groupings, :except => [:index, :show] do
       resources :grouping_parameters, :only => [:edit, :update, :destroy]
       resources :parameter_weights, :only => [:show, :edit, :update]
-      resources :alternatives, :only => [:index, :edit, :update] do
-        resources :accomodation_waves, :except => [:index, :show] do
-          resources :advertising_platforms, :only => [:edit, :update]
-        end
+      resources :alternatives, :only => [:index, :edit, :update, :show] do
+        resources :accomodation_waves, :except => [:index]
+        patch 'upload_csv', :on => :member
+        delete 'destroy_advertising_tools', :on => :member
       end
 
-
-      resources :segments, :only => [:index, :edit, :update] do
+      resources :segments do
         get 'rebuild_segments', :on => :collection
       end
 
-     get 'accomodation_waves', :on => :member
+     get 'selected_alternatives', :on => :member
      get 'alternatives_selection', :on => :member
     end
 
-    patch 'upload_csv'
-    delete 'destroy_research_items'
+    patch 'upload_csv', :on => :member
+    delete 'destroy_research_items', :on => :member
   end
 
   root :to => "welcome#index"

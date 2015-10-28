@@ -1,15 +1,10 @@
 <%= render :partial => 'commons/breadcrumbs' %>
-<%= simple_nested_form_for [@software_product, @grouping, @alternative, @accomodation_wave], html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |f| %>
+<%= simple_form_for [@software_product, @grouping, @alternative, @accomodation_wave], html: { class: 'form-horizontal' }, wrapper: :horizontal_form,
+  wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+} do |f| %>
   <%= f.input :duration %>
-  <%= f.simple_fields_for :advertising_platforms, html: { class: 'form-horizontal' }, wrapper: :horizontal_form do |wf| %>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= wf.input :title %>
-        <%= wf.input :url %>
-        <%= wf.link_to_remove "Удалить рекламную площадку", :class => "pull-right" %>
-      </div>
-    </div>
-  <% end %>
-  <%= f.link_to_add "Добавить рекламную площадку", :advertising_platforms, :class => "btn btn-primary" %>
+  <%= f.input :budget %>
+  <%= f.input :advertising_tools, :as => :check_boxes, :collection => @alternative.grouped_advertising_tools.keys, :include_hidden => false, :checked => @accomodation_wave.advertising_tools << true %>
   <%= f.button :submit, :class => "pull-right btn-success" %>
 <% end %>

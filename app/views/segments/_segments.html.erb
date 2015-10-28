@@ -23,6 +23,6 @@
         <%= render :partial => 'segment_children', :locals => {segment: segment} if segment.has_children? %>
       <% end %>
     </ul>
-    <%= link_to "Пересчитать сегменты", rebuild_segments_software_product_grouping_segments_path(@software_product, @grouping, stage => "third"), :class => "btn btn-primary pull-right" %>
+    <%= link_to "Пересчитать сегменты", rebuild_segments_software_product_grouping_segments_path(@software_product, @grouping, stage => "third"), :class => "btn btn-primary pull-right" if @grouping.grouping_parameters? %>
   <% end %>
 </div>

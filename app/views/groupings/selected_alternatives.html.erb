@@ -1,0 +1,15 @@
+<%= render :partial => 'commons/breadcrumbs' %>
+<div class="table-responsive">
+  <table class="table table-hover table-condensed table-bordered">
+    <thead>
+      <th>Название</th>
+    </thead>
+    <tbody>
+      <% @alternatives.each do |alternative| %>
+        <tr>
+          <td><%= link_to alternative.segment_full_name, software_product_grouping_alternative_path(@software_product, @grouping, alternative, :stage => "fourth") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
