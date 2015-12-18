@@ -28,6 +28,7 @@ gem 'sidekiq-status'
 gem 'simple_form'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
+gem 'rails-erd', github: 'ready4god2513/rails-erd', branch: 'rails-4.2-support-fix'
 
 group :development do
   gem 'annotate'

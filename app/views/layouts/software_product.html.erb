@@ -1,65 +1,67 @@
 <% content_for :software_products do %>
   <div class="row content-wrapper">
     <div class="col-xs-3">
-      <ul class="nav nav-pills nav-stacked">
-        <%= content_tag :li, :class => stage == 'first' ? 'active' : nil  do %>
-          <%= link_to "Исходные данные ПП", software_product_path(@software_product, :stage => "first") %>
-        <% end %>
-        <%= content_tag :li, :class => stage == 'second' ? 'active' : nil  do %>
-          <%= link_to "Сегментирование потребителей", software_product_path(@software_product, :stage => "second") %>
-        <% end %>
-        <%= content_tag :li, :class => stage == 'third' ? 'active opened' : 'closed' do %>
-          <%= content_tag :a, :class => "js-submenu-toggler" do %>
-            <span class="glyphicon<%= stage != "third" ? " glyphicon-plus": " glyphicon-minus" %>" aria-hidden="true"></span>
-            <span>Выбор альтернатив поставки</span>
+      <% if @software_product && !@software_product.new_record? %>
+        <ul class="nav nav-pills nav-stacked">
+          <%= content_tag :li, :class => stage == 'first' ? 'active' : nil  do %>
+            <%= link_to "Исходные данные ПП", software_product_path(@software_product, :stage => "first") %>
           <% end %>
-          <ul class = "submenu js-submenu<%= stage != "third" ? " hidden": nil %>">
-            <% if @software_product.groupings.any? %>
-              <% @software_product.groupings.each do |grouping| %>
-                <li>
-                  <%= link_to grouping.title, software_product_grouping_segments_path(@software_product, grouping, :stage => "third") %>
-                  <ul>
-                    <%= content_tag :li, :class => controller_name == 'segments' && !params[:childless] && action_name != 'edit' && @grouping == grouping ? 'active' : nil  do %>
-                      <%= link_to "Список сегментов", software_product_grouping_segments_path(@software_product, grouping, :stage => "third") %>
-                    <% end %>
-                    <%= content_tag :li, :class => params[:childless] && @grouping == grouping || (controller_name == 'segments' && action_name == 'edit') && @grouping == grouping ? 'active' : nil  do %>
-                      <%= link_to "Выбор вариантов поставки", software_product_grouping_segments_path(@software_product, grouping, :childless => true, :stage => "third") %>
-                    <% end %>
-                    <%= content_tag :li, :class => controller_name == 'parameter_weights' && @grouping == grouping ? 'active' : nil  do %>
-                      <%= link_to "Веса показателей привелигированности", software_product_grouping_parameter_weight_path(@software_product, grouping, grouping.parameter_weight, :stage => "third") %>
-                    <% end %>
-                    <%= content_tag :li, :class => controller_name == 'alternatives' && action_name != 'show' && @grouping == grouping ? 'active' : nil  do %>
-                      <%= link_to "Оценка альтернатив", software_product_grouping_alternatives_path(@software_product, grouping) %>
-                    <% end %>
-                    <%= content_tag :li, :class => @grouping == grouping && request.path.match(/alternatives_selection/)? 'active' : nil  do %>
-                      <%= link_to "Выбор альтернатив", alternatives_selection_software_product_grouping_path(@software_product, grouping, :stage => "third") %>
-                    <% end %>
-                  </ul>
-                </li>
+          <%= content_tag :li, :class => stage == 'second' ? 'active' : nil  do %>
+            <%= link_to "Сегментирование потребителей", software_product_path(@software_product, :stage => "second") %>
+          <% end %>
+          <%= content_tag :li, :class => stage == 'third' ? 'active opened' : 'closed' do %>
+            <%= content_tag :a, :class => "js-submenu-toggler" do %>
+              <span class="glyphicon<%= stage != "third" ? " glyphicon-plus": " glyphicon-minus" %>" aria-hidden="true"></span>
+              <span>Выбор альтернатив поставки</span>
+            <% end %>
+            <ul class = "submenu js-submenu<%= stage != "third" ? " hidden": nil %>">
+              <% if @software_product.groupings.any? %>
+                <% @software_product.groupings.each do |grouping| %>
+                  <li>
+                    <%= link_to grouping.title, software_product_grouping_segments_path(@software_product, grouping, :stage => "third") %>
+                    <ul>
+                      <%= content_tag :li, :class => controller_name == 'segments' && !params[:childless] && action_name != 'edit' && @grouping == grouping ? 'active' : nil  do %>
+                        <%= link_to "Список сегментов", software_product_grouping_segments_path(@software_product, grouping, :stage => "third") %>
+                      <% end %>
+                      <%= content_tag :li, :class => params[:childless] && @grouping == grouping || (controller_name == 'segments' && action_name == 'edit') && @grouping == grouping ? 'active' : nil  do %>
+                        <%= link_to "Выбор вариантов поставки", software_product_grouping_segments_path(@software_product, grouping, :childless => true, :stage => "third") %>
+                      <% end %>
+                      <%= content_tag :li, :class => controller_name == 'parameter_weights' && @grouping == grouping ? 'active' : nil  do %>
+                        <%= link_to "Веса показателей привелигированности", software_product_grouping_parameter_weight_path(@software_product, grouping, grouping.parameter_weight, :stage => "third") %>
+                      <% end %>
+                      <%= content_tag :li, :class => controller_name == 'alternatives' && action_name != 'show' && @grouping == grouping ? 'active' : nil  do %>
+                        <%= link_to "Оценка альтернатив", software_product_grouping_alternatives_path(@software_product, grouping) %>
+                      <% end %>
+                      <%= content_tag :li, :class => @grouping == grouping && request.path.match(/alternatives_selection/)? 'active' : nil  do %>
+                        <%= link_to "Выбор альтернатив", alternatives_selection_software_product_grouping_path(@software_product, grouping, :stage => "third") %>
+                      <% end %>
+                    </ul>
+                  </li>
+                <% end %>
+              <% else %>
+                <p>Вы еще не добавили ни одной группировки</p>
               <% end %>
+            </ul>
+          <% end %>
+          <%= content_tag :li, :class => stage == 'fourth' ? 'active opened' : 'closed' do %>
+            <%= content_tag :a, :class => "js-submenu-toggler" do %>
+              <span class="glyphicon<%= stage != "fourth" ? " glyphicon-plus": " glyphicon-minus" %>" aria-hidden="true"></span>
+              <span>План размещения КС</span>
+            <% end %>
+            <% if @software_product.groupings.any? %>
+              <ul class = "submenu js-submenu<%= stage != "fourth" ? " hidden": nil %>">
+                <% @software_product.groupings.each do |grouping| %>
+                  <%= content_tag :li, :class => @grouping == grouping && stage == "fourth" ? 'active' : nil  do %>
+                    <%= link_to grouping.title, selected_alternatives_software_product_grouping_path(@software_product, grouping, :stage => "fourth") %>
+                  <% end %>
+                <% end %>
+              </ul>
             <% else %>
               <p>Вы еще не добавили ни одной группировки</p>
             <% end %>
-          </ul>
-        <% end %>
-        <%= content_tag :li, :class => stage == 'fourth' ? 'active opened' : 'closed' do %>
-          <%= content_tag :a, :class => "js-submenu-toggler" do %>
-            <span class="glyphicon<%= stage != "fourth" ? " glyphicon-plus": " glyphicon-minus" %>" aria-hidden="true"></span>
-            <span>План размещения КС</span>
           <% end %>
-          <% if @software_product.groupings.any? %>
-            <ul class = "submenu js-submenu<%= stage != "fourth" ? " hidden": nil %>">
-              <% @software_product.groupings.each do |grouping| %>
-                <%= content_tag :li, :class => @grouping == grouping && stage == "fourth" ? 'active' : nil  do %>
-                  <%= link_to grouping.title, selected_alternatives_software_product_grouping_path(@software_product, grouping, :stage => "fourth") %>
-                <% end %>
-              <% end %>
-            </ul>
-          <% else %>
-            <p>Вы еще не добавили ни одной группировки</p>
-          <% end %>
-        <% end %>
-      </ul>
+        </ul>
+      <% end %>
     </div>
     <div class="col-xs-9">
       <div class="content-wrapper">
