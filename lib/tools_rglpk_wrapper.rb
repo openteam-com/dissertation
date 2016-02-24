@@ -45,12 +45,12 @@ class ToolsRglpkWrapper
         row_index += 1
       end
 
-      advertising_tools.group_by(&:platform_title).each do |platform, tools|
-        tools.group_by(&:tool_title).each do |tool|
-          rows[row_index].set_bounds(Rglpk::GLP_UP, 0, accomodation_wave.duration)
-          row_index += 1
-        end
-      end
+      #advertising_tools.group_by(&:platform_title).each do |platform, tools|
+        #tools.group_by(&:tool_title).each do |tool|
+          #rows[row_index].set_bounds(Rglpk::GLP_UP, 0, accomodation_wave.duration)
+          #row_index += 1
+        #end
+      #end
 
       accomodation_wave.advertising_tools.each do |tool|
         rows[row_index].set_bounds(Rglpk::GLP_LO, 0, 0)
@@ -78,15 +78,14 @@ class ToolsRglpkWrapper
         coef_array << advertising_tools.map.with_index{ |tool, tool_index| tool_index == index ? tool.period : 0 }
       end
 
-      advertising_tools.group_by(&:platform_title).each do |platform, tools|
-        tools.group_by(&:tool_title).each do |tool_kind, tools_by_kind_and_platform|
-          coef_array << advertising_tools.map{ |tool| tools_by_kind_and_platform.include?(tool) ? tool.period : 0 }
-        end
-      end
+      #advertising_tools.group_by(&:platform_title).each do |platform, tools|
+        #tools.group_by(&:tool_title).each do |tool_kind, tools_by_kind_and_platform|
+          #coef_array << advertising_tools.map{ |tool| tools_by_kind_and_platform.include?(tool) ? tool.period : 0 }
+        #end
+      #end
 
       accomodation_wave.advertising_tools.each do |ad_tool|
         coef_array << advertising_tools.map{ |tool| tool.tool_title == ad_tool ? 1 : 0 }
-        puts advertising_tools.map{ |tool| tool.tool_title == ad_tool ? 1 : 0 }.join(" ")
       end
 
       problem.set_matrix coef_array.flatten
